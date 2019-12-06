@@ -27,10 +27,15 @@ public class Demo {
         for(Movie m : movies){
             stringList.add(m.title);
         }
+
+
         myList.ListToFile((ArrayList<String>) stringList,"MyListUser1");
         List<String> uniTest = u.findFile("MyListUser1");
 
+
         MyListReader mlr = new MyListReader();
+
+
         ArrayList<Movie> movieList = (ArrayList<Movie>) mlr.MyListMovies("MyListUser1","film.txt");
         ArrayList<Series> seriesList = (ArrayList<Series>) mlr.MyListSeries("MyListUser1", "serier.txt");
 
@@ -38,9 +43,12 @@ public class Demo {
         for(Movie m : movieList){
             m.show();
         }
+
         for(Series s : seriesList){
             s.show();
         }
+
+
 /*
 
         for (Movie m : movies) {
