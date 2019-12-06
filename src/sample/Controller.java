@@ -1,6 +1,14 @@
 package sample;
 
+import javafx.scene.control.Button;
+
+
 public class Controller {
 
-    // hej
+    public Button button;
+
+    public void buttonClick(){
+        System.out.println("klik!!!");
+    }
+
 }
