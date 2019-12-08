@@ -17,4 +17,16 @@ public class Video {
     public void show(){
         System.out.print(title + " " + year + " ");
     }
+
+    public int getYear(){
+        return year;
+    }
+
+    public String getTitle(){
+        return title;
+    }
+
+    public double getRating(){
+        return rating;
+    }
 }

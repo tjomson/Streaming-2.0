@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Demo {
-
+/*
     public static void main(String[] args) throws IOException {
         Reader r1 = new MovieReader();
         Reader r2 = new SeriesReader();
@@ -68,8 +68,9 @@ public class Demo {
             seriesImg.add(image);
 
         }
-*/
+
 
 
     }
+    */
 }

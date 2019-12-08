@@ -27,4 +27,7 @@ public class Series extends Video{
         System.out.println();
     }
 
+    public int getEndYear(){
+        return endYear;
+    }
 }
