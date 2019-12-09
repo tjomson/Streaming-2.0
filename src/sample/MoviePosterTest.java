@@ -33,9 +33,9 @@ public class MoviePosterTest extends Application {
             FileInputStream f;
 
             if (video instanceof Movie) {
-                f = new FileInputStream("Billeder/" + video.title + ".jpg");
+                f = new FileInputStream("Billeder/" + video.getTitle() + ".jpg");
             } else {
-                f = new FileInputStream("Serier - billeder/" + video.title + ".jpg");
+                f = new FileInputStream("Serier - billeder/" + video.getTitle() + ".jpg");
             }
             Image image = new Image(f);
 
@@ -45,7 +45,7 @@ public class MoviePosterTest extends Application {
             vBox.setBorder(border);
 
             vBox.getChildren().add(new ImageView(image));
-            Label titleLabel = new Label(video.title);
+            Label titleLabel = new Label(video.getTitle());
             titleLabel.setWrapText(true);
             vBox.getChildren().add(titleLabel);
             Label yearLabel;
@@ -62,18 +62,18 @@ public class MoviePosterTest extends Application {
                 yearLabel = new Label(video.getYear() + "-" + endYearString);
             }
             else {
-                yearLabel = new Label("" + video.year);
+                yearLabel = new Label("" + video.getYear());
             }
 
             vBox.getChildren().add(yearLabel);
 
             FlowPane genreField = new FlowPane();
 
-            for (String s : video.genres) {
+            for (String s : video.getGenres()) {
                 genreField.getChildren().add(new Label(s + " "));
             }
 
-            Label ratingLabel = new Label("" + video.rating);
+            Label ratingLabel = new Label("" + video.getRating());
             vBox.getChildren().addAll(genreField,ratingLabel);
             flowPane.getChildren().add(vBox);
         }
