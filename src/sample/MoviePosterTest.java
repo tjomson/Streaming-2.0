@@ -102,7 +102,18 @@ public class MoviePosterTest extends Application {
         movieCheckBox.setSelected(true);
         seriesCheckBox.setSelected(true);
 
-        searchBar.getChildren().addAll(new Label("Search for title "),searchField,searchButton,new Label("   Sort by "),sortingOptions,new Label("    Genres "), genreOptions, new Label("    Show movies "),movieCheckBox, new Label("    Show series "), seriesCheckBox);
+        searchBar.getChildren().addAll(
+                new Label("Search for title "),
+                searchField,
+                searchButton,
+                new Label("   Sort by "),
+                sortingOptions,
+                new Label("    Genres "),
+                genreOptions,
+                new Label("    Show movies "),
+                movieCheckBox,
+                new Label("    Show series "),
+                seriesCheckBox);
 
         window.getChildren().addAll(searchBar,scrollPane);
         window.setSpacing(10);
