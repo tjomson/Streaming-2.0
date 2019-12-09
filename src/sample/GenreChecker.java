@@ -13,7 +13,7 @@ public class GenreChecker {
         videos.addAll(movies);
         videos.addAll(series);
 
-        for(Video video :videos) {
+        for(Video video : videos) {
             for(String genre : video.getGenres()){
                 if(!genres.contains(genre)){
                     genres.add(genre);

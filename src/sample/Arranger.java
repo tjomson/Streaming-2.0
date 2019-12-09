@@ -11,10 +11,10 @@ public class Arranger {
             videolist.sort(Comparator.comparing(Video::getTitle));
         }
         if (kind.equals("Year")) {
-            videolist.sort(Comparator.comparing(Video::getYear));
+            videolist.sort(Comparator.comparing(Video::getYear).reversed());
         }
         if (kind.equals("Rating")) {
-            videolist.sort(Comparator.comparing(Video::getRating));
+            videolist.sort(Comparator.comparing(Video::getRating).reversed());
         }
         return videolist;
     }

@@ -27,11 +27,10 @@ public class MoviePosterTest extends Application {
         List<Video> videos = new ArrayList<>();
         videos.addAll(movies);
         videos.addAll(series);
-        new Arranger().arrange(videos, "Title");
+        new Arranger().arrange(videos, "Year");
 
         for (Video video : videos) {
             FileInputStream f;
-
             if (video instanceof Movie) {
                 f = new FileInputStream("Billeder/" + video.getTitle() + ".jpg");
             } else {
@@ -69,8 +68,8 @@ public class MoviePosterTest extends Application {
 
             FlowPane genreField = new FlowPane();
 
-            for (String s : video.getGenres()) {
-                genreField.getChildren().add(new Label(s + " "));
+            for (String genre : video.getGenres()) {
+                genreField.getChildren().add(new Label(genre + " "));
             }
 
             Label ratingLabel = new Label("" + video.getRating());
@@ -84,7 +83,7 @@ public class MoviePosterTest extends Application {
 
         VBox window = new VBox();
         TextField searchField = new TextField();
-        HBox searchBar = new HBox();
+        HBox topBar = new HBox();
         Button searchButton = new Button("Search");
 
         ComboBox<String> sortingOptions = new ComboBox<>();
@@ -102,7 +101,7 @@ public class MoviePosterTest extends Application {
         movieCheckBox.setSelected(true);
         seriesCheckBox.setSelected(true);
 
-        searchBar.getChildren().addAll(
+        topBar.getChildren().addAll(
                 new Label("Search for title "),
                 searchField,
                 searchButton,
@@ -115,7 +114,7 @@ public class MoviePosterTest extends Application {
                 new Label("    Show series "),
                 seriesCheckBox);
 
-        window.getChildren().addAll(searchBar,scrollPane);
+        window.getChildren().addAll(topBar,scrollPane);
         window.setSpacing(10);
 
         stage.setScene(new Scene(window, 1000, 800));
