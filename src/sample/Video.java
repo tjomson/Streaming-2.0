@@ -29,4 +29,7 @@ public class Video {
     public double getRating(){
         return rating;
     }
+    public String[] getGenres(){
+        return genres;
+    }
 }

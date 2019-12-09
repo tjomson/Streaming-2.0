@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -10,6 +11,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class MoviePosterTest extends Application {
@@ -93,6 +95,13 @@ public class MoviePosterTest extends Application {
         sortingOptions.getItems().addAll("Title","Year","Rating");
         sortingOptions.getSelectionModel().select(0);
         searchBar.getChildren().add(sortingOptions);
+
+        List<String> genres = new GenreChecker().getGenreList();
+        ComboBox<String> genreOptions = new ComboBox<>();
+        genreOptions.getItems().add("All");
+        genreOptions.getItems().addAll(genres);
+        genreOptions.getSelectionModel().select(0);
+        searchBar.getChildren().addAll(new Label("    Genres "), genreOptions);
 
         window.getChildren().addAll(searchBar,scrollPane);
         window.setSpacing(10);
