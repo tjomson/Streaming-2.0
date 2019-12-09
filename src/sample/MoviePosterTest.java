@@ -1,7 +1,6 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.*;
@@ -11,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import java.io.FileInputStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class MoviePosterTest extends Application {
@@ -88,20 +86,23 @@ public class MoviePosterTest extends Application {
         TextField searchField = new TextField();
         HBox searchBar = new HBox();
         Button searchButton = new Button("Search");
-        searchBar.getChildren().addAll(new Label("Search for title "),searchField,searchButton,new Label("   Sort by "));
 
-        //Crasher af en eller anden grund når man klikker på drop down menuen.
         ComboBox<String> sortingOptions = new ComboBox<>();
         sortingOptions.getItems().addAll("Title","Year","Rating");
         sortingOptions.getSelectionModel().select(0);
-        searchBar.getChildren().add(sortingOptions);
 
         List<String> genres = new GenreChecker().getGenreList();
         ComboBox<String> genreOptions = new ComboBox<>();
         genreOptions.getItems().add("All");
         genreOptions.getItems().addAll(genres);
         genreOptions.getSelectionModel().select(0);
-        searchBar.getChildren().addAll(new Label("    Genres "), genreOptions);
+
+        CheckBox movieCheckBox = new CheckBox();
+        CheckBox seriesCheckBox = new CheckBox();
+        movieCheckBox.setSelected(true);
+        seriesCheckBox.setSelected(true);
+
+        searchBar.getChildren().addAll(new Label("Search for title "),searchField,searchButton,new Label("   Sort by "),sortingOptions,new Label("    Genres "), genreOptions, new Label("    Show movies "),movieCheckBox, new Label("    Show series "), seriesCheckBox);
 
         window.getChildren().addAll(searchBar,scrollPane);
         window.setSpacing(10);
