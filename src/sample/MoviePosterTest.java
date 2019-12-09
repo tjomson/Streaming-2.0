@@ -27,7 +27,7 @@ public class MoviePosterTest extends Application {
         List<Video> videos = new ArrayList<>();
         videos.addAll(movies);
         videos.addAll(series);
-        new Arranger().arrange(videos, "Year");
+        new Arranger().arrange(videos, "Title");
 
         for (Video video : videos) {
             FileInputStream f;
