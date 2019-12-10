@@ -10,7 +10,6 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
 import java.io.FileInputStream;
-import java.util.ArrayList;
 import java.util.List;
 
 public class MoviePosterTest extends Application {
@@ -22,13 +21,15 @@ public class MoviePosterTest extends Application {
         flowPane.setVgap(10);
         flowPane.setHgap(10);
 
+        /*
         List<Video> movies = new MovieReader().readMovies("film.txt");
         List<Video> series = new SeriesReader().readSeries("serier.txt");
 
         List<Video> videos = new ArrayList<>();
         videos.addAll(movies);
         videos.addAll(series);
-        new Arranger().arrange(videos, "Title");
+         */
+        List<Video> videos = new SearchEngine().getSearchItems("","Year","All",true,true);
 
         for (Video video : videos) {
             FileInputStream f;
@@ -85,7 +86,7 @@ public class MoviePosterTest extends Application {
         VBox window = new VBox();
         TextField searchField = new TextField();
         HBox topBar = new HBox();
-        Button searchButton = new Button("Search");
+        Button applyButton = new Button("Apply");
 
         ComboBox<String> sortingOptions = new ComboBox<>();
         sortingOptions.getItems().addAll("Title","Year","Rating");
@@ -105,7 +106,6 @@ public class MoviePosterTest extends Application {
         topBar.getChildren().addAll(
                 new Label("Search for title "),
                 searchField,
-                searchButton,
                 new Label("   Sort by "),
                 sortingOptions,
                 new Label("    Genres "),
@@ -113,7 +113,8 @@ public class MoviePosterTest extends Application {
                 new Label("    Show movies "),
                 movieCheckBox,
                 new Label("    Show series "),
-                seriesCheckBox);
+                seriesCheckBox,
+                applyButton);
 
         window.getChildren().addAll(topBar,scrollPane);
         window.setSpacing(10);
