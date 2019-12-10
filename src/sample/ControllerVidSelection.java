@@ -26,27 +26,27 @@ public class ControllerVidSelection {
     @FXML
     ImageView videoImages;
 
-    sample.Model model;
+    Model model;
 
     public void openStartScene() throws IOException {
 
-        model = sample.Model.getInstance();
+        model = Model.getInstance();
 
         FlowPane flowPane = new FlowPane();
         flowPane.setVgap(10);
         flowPane.setHgap(10);
 
-        List<sample.Video> movies = new sample.MovieReader().readMovies("film.txt");
-        List<sample.Video> series = new sample.SeriesReader().readSeries("serier.txt");
+        List<Video> movies = new MovieReader().readMovies("film.txt");
+        List<Video> series = new SeriesReader().readSeries("serier.txt");
 
-        List<sample.Video> videos = new ArrayList<>();
+        List<Video> videos = new ArrayList<>();
         videos.addAll(movies);
         videos.addAll(series);
         new Arranger().arrange(videos, "Title");
 
-        for (sample.Video video : videos) {
+        for (Video video : videos) {
             FileInputStream f;
-            if (video instanceof sample.Movie) {
+            if (video instanceof Movie) {
                 f = new FileInputStream("Billeder/" + video.getTitle() + ".jpg");
             } else {
                 f = new FileInputStream("Serier - billeder/" + video.getTitle() + ".jpg");
@@ -64,8 +64,8 @@ public class ControllerVidSelection {
             vBox.getChildren().add(titleLabel);
             Label yearLabel;
 
-            if(video instanceof sample.Series){
-                sample.Series series1 = (sample.Series) video;
+            if(video instanceof Series){
+                Series series1 = (Series) video;
                 String endYearString;
                 if(series1.getEndYear() == 0){
                     endYearString = "";
@@ -105,7 +105,7 @@ public class ControllerVidSelection {
         sortingOptions.getItems().addAll("Title","Year","Rating");
         sortingOptions.getSelectionModel().select(0);
 
-        List<String> genres = new sample.GenreChecker().getGenreList();
+        List<String> genres = new GenreChecker().getGenreList();
         ComboBox<String> genreOptions = new ComboBox<>();
         genreOptions.getItems().add("All");
         genreOptions.getItems().addAll(genres);
@@ -129,8 +129,10 @@ public class ControllerVidSelection {
                 new Label("    Show series "),
                 seriesCheckBox);
 
-        window.getChildren().addAll(topBar,scrollPane);
+        Label userNameLabel = new Label("You are logged in as: " + model.getUserName());
+        window.getChildren().addAll(userNameLabel, topBar,scrollPane);
         window.setSpacing(10);
+
 
         Stage stage = new Stage();
 
@@ -139,11 +141,11 @@ public class ControllerVidSelection {
     }
 
     public void openSeries() throws IOException {
-        model = sample.Model.getInstance();
+        model = Model.getInstance();
 
-        List<sample.Series> series = model.getSeries();
+        List<Series> series = model.getSeries();
 
-        for(sample.Series s : series) {
+        for(Series s : series) {
             s.show();
         }
     }
