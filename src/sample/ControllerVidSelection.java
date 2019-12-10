@@ -1,6 +1,9 @@
 package sample;
 
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -28,6 +31,13 @@ public class ControllerVidSelection {
 
     Model model;
 
+    TextField searchField = new TextField();
+    ComboBox<String> sortingOptions = new ComboBox<>();
+    ComboBox<String> genreOptions = new ComboBox<>();
+    CheckBox movieCheckBox = new CheckBox();
+    CheckBox seriesCheckBox = new CheckBox();
+    Button applyButton = new Button("Apply");
+
     public void openStartScene() throws IOException {
 
         model = Model.getInstance();
@@ -47,50 +57,7 @@ public class ControllerVidSelection {
         List<Video> videos = new SearchEngine().getSearchItems("","Year","All",true,true);
 
         for (Video video : videos) {
-            FileInputStream f;
-            if (video instanceof Movie) {
-                f = new FileInputStream("Billeder/" + video.getTitle() + ".jpg");
-            } else {
-                f = new FileInputStream("Serier - billeder/" + video.getTitle() + ".jpg");
-            }
-            Image image = new Image(f);
-
-            VBox vBox = new VBox();
-            vBox.setPrefWidth(140);
-            Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
-            vBox.setBorder(border);
-
-            vBox.getChildren().add(new ImageView(image));
-            Label titleLabel = new Label(video.getTitle());
-            titleLabel.setWrapText(true);
-            vBox.getChildren().add(titleLabel);
-            Label yearLabel;
-
-            if(video instanceof Series){
-                Series series1 = (Series) video;
-                String endYearString;
-                if(series1.getEndYear() == 0){
-                    endYearString = "";
-                }
-                else{
-                    endYearString = series1.getEndYear() + "";
-                }
-                yearLabel = new Label(video.getYear() + "-" + endYearString);
-            }
-            else {
-                yearLabel = new Label("" + video.getYear());
-            }
-
-            vBox.getChildren().add(yearLabel);
-
-            FlowPane genreField = new FlowPane();
-
-            for (String genre : video.getGenres()) {
-                genreField.getChildren().add(new Label(genre + " "));
-            }
-
-            Label ratingLabel = new Label("" + video.getRating());
-            vBox.getChildren().addAll(genreField,ratingLabel);
+            VBox vBox = new VideoVBox().getVideoVBox(video);
             flowPane.getChildren().add(vBox);
         }
 
@@ -99,22 +66,35 @@ public class ControllerVidSelection {
         scrollPane.setFitToWidth(true);
 
         VBox window = new VBox();
-        TextField searchField = new TextField();
-        HBox topBar = new HBox();
-        Button applyButton = new Button("Apply");
 
-        ComboBox<String> sortingOptions = new ComboBox<>();
+        HBox topBar = new HBox();
+
+        applyButton.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    flowPane.getChildren().clear();
+                    List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected());
+                    for(Video v : searchedVideos) {
+                        VBox vBox = new VideoVBox().getVideoVBox(v);
+                        flowPane.getChildren().add(vBox);
+                    }
+
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
         sortingOptions.getItems().addAll("Title","Year","Rating");
         sortingOptions.getSelectionModel().select(0);
 
         List<String> genres = new GenreChecker().getGenreList();
-        ComboBox<String> genreOptions = new ComboBox<>();
         genreOptions.getItems().add("All");
         genreOptions.getItems().addAll(genres);
         genreOptions.getSelectionModel().select(0);
 
-        CheckBox movieCheckBox = new CheckBox();
-        CheckBox seriesCheckBox = new CheckBox();
         movieCheckBox.setSelected(true);
         seriesCheckBox.setSelected(true);
 

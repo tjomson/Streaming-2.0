@@ -23,7 +23,7 @@ public class Reader extends UniversalReader{
         return s[2].replace(" ","").split(",");
     }
     public double getRating(String[] s){
-        return Double.parseDouble(s[3].replace(",", ""));
+        return Double.parseDouble(s[3].replace(",", "."));
     }
 }
 

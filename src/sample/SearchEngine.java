@@ -50,7 +50,4 @@ public class SearchEngine {
 
         return searchList;
     }
-
-
-
 }
