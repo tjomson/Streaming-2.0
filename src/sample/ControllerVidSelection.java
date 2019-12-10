@@ -22,7 +22,7 @@ public class ControllerVidSelection {
     @FXML
     ImageView videoImages;
 
-    Model model;
+    sample.Model model;
 
     public void openMovies() throws IOException {
 
