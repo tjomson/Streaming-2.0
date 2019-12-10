@@ -7,12 +7,18 @@ import javafx.stage.Stage;
 
 public class  goatdemo extends Application {
 
+    Model model;
+
     public static void main(String[] args) {
         launch(args);
     }
 
     @Override
     public void start(Stage stage) throws Exception {
+
+        model = Model.getInstance();
+        model.addCurrentStage(stage);
+
         Parent root = FXMLLoader.load(getClass().getResource("GOAT.fxml"));
         stage.setTitle("Goat");
         stage.setScene(new Scene(root, 400, 200));

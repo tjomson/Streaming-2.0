@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +15,8 @@ public class Model {
     private static Model model;
     int chosenUser;
     String userName;
+    Stage currentStage;
+
     private Model() {
         users = new ArrayList<>();
     }
@@ -48,6 +52,14 @@ public class Model {
 
     public String getUserName() {
             return userName;
+        }
+
+        public void addCurrentStage(Stage stage) {
+            currentStage = stage;
+        }
+
+        public Stage getStage() {
+        return currentStage;
         }
     }
 

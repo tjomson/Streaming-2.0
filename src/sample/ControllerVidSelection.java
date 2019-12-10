@@ -37,6 +37,7 @@ public class ControllerVidSelection {
     CheckBox movieCheckBox = new CheckBox();
     CheckBox seriesCheckBox = new CheckBox();
     Button applyButton = new Button("Apply");
+    Button changeUserButton = new Button("Change user");
 
     public void openStartScene() throws IOException {
 
@@ -67,7 +68,10 @@ public class ControllerVidSelection {
 
         VBox window = new VBox();
 
+        Label userNameLabel = new Label("You are logged in as: " + model.getUserName());
+
         HBox topBar = new HBox();
+
 
         applyButton.setOnAction(new EventHandler<ActionEvent>() {
             @Override
@@ -109,9 +113,10 @@ public class ControllerVidSelection {
                 movieCheckBox,
                 new Label("    Show series "),
                 seriesCheckBox,
-                applyButton);
+                applyButton,
+                changeUserButton);
 
-        window.getChildren().addAll(topBar,scrollPane);
+        window.getChildren().addAll(userNameLabel,topBar,scrollPane);
         window.setSpacing(10);
 
         Stage stage = new Stage();

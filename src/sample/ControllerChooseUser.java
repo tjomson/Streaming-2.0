@@ -34,6 +34,7 @@ public class ControllerChooseUser {
 
         if (!user1.getText().equals("New User")) {
             openStartSceneMethod();
+            model.getStage().close();
         } else {
             openChangeUserWindow();
 
@@ -48,7 +49,7 @@ public class ControllerChooseUser {
 
         if (!user2.getText().equals("New User")) {
             openStartSceneMethod();
-
+            model.getStage().close();
         } else {
             openChangeUserWindow();
 
@@ -63,7 +64,7 @@ public class ControllerChooseUser {
 
         if (!user3.getText().equals("New User")) {
             openStartSceneMethod();
-
+            model.getStage().close();
         } else {
             openChangeUserWindow();
 
@@ -102,17 +103,6 @@ public class ControllerChooseUser {
         }
     }
 
-
-            public void openVideoSelection() throws IOException {
-
-                model = Model.getInstance();
-
-                vidSelection = new Stage();
-                Parent root = FXMLLoader.load(getClass().getResource("videoSelection.fxml"));
-                vidSelection.setTitle(model.getUserName() + " - All videos and series");
-                vidSelection.setScene(new Scene(root, 400, 200));
-                vidSelection.show();
-            }
         }
 
 
