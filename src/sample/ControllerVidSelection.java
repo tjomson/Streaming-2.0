@@ -1,5 +1,6 @@
 package sample;
 
+import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
@@ -18,16 +19,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ControllerVidSelection {
-    @FXML
-    Button movie;
-    @FXML
-    Button series;
-    @FXML
-    Button myList;
-    @FXML
-    TextArea videoer;
-    @FXML
-    ImageView videoImages;
 
     Model model;
 
@@ -38,6 +29,8 @@ public class ControllerVidSelection {
     CheckBox seriesCheckBox = new CheckBox();
     Button applyButton = new Button("Apply");
     Button changeUserButton = new Button("Change user");
+    Stage mainStage;
+    Stage restartStage;
 
     public void openStartScene() throws IOException {
 
@@ -47,14 +40,6 @@ public class ControllerVidSelection {
         flowPane.setVgap(10);
         flowPane.setHgap(10);
 
-        /*
-        List<Video> movies = new MovieReader().readMovies("film.txt");
-        List<Video> series = new SeriesReader().readSeries("serier.txt");
-
-        List<Video> videos = new ArrayList<>();
-        videos.addAll(movies);
-        videos.addAll(series);
-         */
         List<Video> videos = new SearchEngine().getSearchItems("","Year","All",true,true);
 
         for (Video video : videos) {
@@ -90,6 +75,16 @@ public class ControllerVidSelection {
                 }
             }
         });
+        //VIRKER IKKE - change user knap får det til at crashe
+        changeUserButton.setOnAction(actionEvent -> {
+            goatdemo gd = new goatdemo();
+            try {
+                gd.startGame(restartStage);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            mainStage.close();
+        });
 
         sortingOptions.getItems().addAll("Title","Year","Rating");
         sortingOptions.getSelectionModel().select(0);
@@ -119,19 +114,10 @@ public class ControllerVidSelection {
         window.getChildren().addAll(userNameLabel,topBar,scrollPane);
         window.setSpacing(10);
 
-        Stage stage = new Stage();
+        mainStage = new Stage();
 
-        stage.setScene(new Scene(window, 1000, 800));
-        stage.show();
+        mainStage.setScene(new Scene(window, 1000, 800));
+        mainStage.show();
     }
 
-    public void openSeries() throws IOException {
-        model = Model.getInstance();
-
-        List<Series> series = model.getSeries();
-
-        for(Series s : series) {
-            s.show();
-        }
-    }
 }

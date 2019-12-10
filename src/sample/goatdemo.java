@@ -5,7 +5,9 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-public class  goatdemo extends Application {
+import java.io.IOException;
+
+public class goatdemo extends Application {
 
     Model model;
 
@@ -13,9 +15,7 @@ public class  goatdemo extends Application {
         launch(args);
     }
 
-    @Override
-    public void start(Stage stage) throws Exception {
-
+    public void startGame(Stage stage) throws IOException {
         model = Model.getInstance();
         model.addCurrentStage(stage);
 
@@ -25,5 +25,12 @@ public class  goatdemo extends Application {
         stage.show();
     }
 
+    @Override
+    public void start(Stage stage) throws Exception {
+        startGame(stage);
+    }
 
-}
+    }
+
+
+

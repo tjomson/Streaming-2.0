@@ -25,7 +25,6 @@ public class ControllerChooseUser {
 
     Model model;
 
-    Stage openStart;
 
     public void userClick1() throws IOException {
 
