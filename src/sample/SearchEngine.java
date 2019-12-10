@@ -21,9 +21,8 @@ public class SearchEngine {
 
     public List<Video> getSearchWordVideos(List<Video> videos, String searchWord){
         List<Video> searchWordList = new ArrayList<>();
-        searchWord.toLowerCase();
         for(Video video : videos){
-            if(video.getTitle().toLowerCase().contains(searchWord)){
+            if(video.getTitle().toLowerCase().contains(searchWord.toLowerCase())){
                 searchWordList.add(video);
             }
         }
