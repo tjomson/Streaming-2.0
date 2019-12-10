@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
@@ -26,14 +25,15 @@ public class ControllerChooseUser {
 
     Model model;
 
+    Stage openStart;
+
     public void userClick1() throws IOException {
 
         model = Model.getInstance();
         model.addUser(1);
 
         if (!user1.getText().equals("New User")) {
-            openVideoSelection();
-
+            openStartSceneMethod();
         } else {
             openChangeUserWindow();
 
@@ -47,7 +47,7 @@ public class ControllerChooseUser {
         model.addUser(2);
 
         if (!user2.getText().equals("New User")) {
-            openVideoSelection();
+            openStartSceneMethod();
 
         } else {
             openChangeUserWindow();
@@ -62,13 +62,18 @@ public class ControllerChooseUser {
         model.addUser(3);
 
         if (!user3.getText().equals("New User")) {
-            openVideoSelection();
+            openStartSceneMethod();
 
         } else {
             openChangeUserWindow();
 
         }
 
+    }
+
+    public void openStartSceneMethod() throws IOException {
+        ControllerVidSelection c = new ControllerVidSelection();
+        c.openStartScene();
     }
 
     public void openChangeUserWindow() throws IOException {
