@@ -33,7 +33,7 @@ public class ControllerChooseUser {
 
         if (!user1.getText().equals("New User")) {
             openStartSceneMethod();
-            model.getStage().close();
+            model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
 
@@ -48,7 +48,7 @@ public class ControllerChooseUser {
 
         if (!user2.getText().equals("New User")) {
             openStartSceneMethod();
-            model.getStage().close();
+            model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
 
@@ -63,7 +63,7 @@ public class ControllerChooseUser {
 
         if (!user3.getText().equals("New User")) {
             openStartSceneMethod();
-            model.getStage().close();
+            model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
 

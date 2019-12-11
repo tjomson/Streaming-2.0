@@ -1,5 +1,7 @@
 package sample;
 
+
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,7 +17,12 @@ public class Model {
     private static Model model;
     int chosenUser;
     String userName;
+
     Stage currentStage;
+    Stage mainStage;
+    String user1ButtonString = "New User";
+    String user2ButtonString = "New User";
+    String user3ButtonString = "New User";
 
     private Model() {
         users = new ArrayList<>();
@@ -51,19 +58,43 @@ public class Model {
     }
 
     public String getUserName() {
-            return userName;
-        }
-
-        public void addCurrentStage(Stage stage) {
-            currentStage = stage;
-        }
-
-        public Stage getStage() {
-        return currentStage;
-        }
+        return userName;
     }
 
+    public void addCurrentStage(Stage stage) {
+        currentStage = stage;
+    }
 
+    public Stage getCurrentStage() {
+        return currentStage;
+    }
 
+    public void addMainStage(Stage stage) {
+        mainStage = stage;
+    }
 
+    public Stage getMainStage() {
+        return mainStage;
+    }
+
+    public void setButton1(String name) {
+        user1ButtonString = name;
+    }
+    public void setButton2(String name) {
+        user2ButtonString = name;
+    }
+    public void setButton3(String name) {
+        user3ButtonString = name;
+    }
+    public String getUser1Button() {
+        return user1ButtonString;
+    }
+    public String getUser2Button() {
+        return user2ButtonString;
+    }
+    public String getUser3Button() {
+        return user3ButtonString;
+    }
+
+}
 

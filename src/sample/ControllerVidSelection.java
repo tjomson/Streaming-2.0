@@ -40,7 +40,7 @@ public class ControllerVidSelection {
         flowPane.setVgap(10);
         flowPane.setHgap(10);
 
-        List<Video> videos = new SearchEngine().getSearchItems("","Year","All",true,true);
+        List<Video> videos = new SearchEngine().getSearchItems("","Title","All",true,true);
 
         for (Video video : videos) {
             VBox vBox = video.getVideoVBox();
@@ -75,15 +75,14 @@ public class ControllerVidSelection {
                 }
             }
         });
-        //VIRKER IKKE - change user knap får det til at crashe
         changeUserButton.setOnAction(actionEvent -> {
-            goatdemo gd = new goatdemo();
+            ControllerStartScreen c = new ControllerStartScreen();
             try {
-                gd.startGame(restartStage);
+                c.goToChooseUser();
+                model.getMainStage().close();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            mainStage.close();
         });
 
         sortingOptions.getItems().addAll("Title","Year","Rating");
@@ -115,7 +114,7 @@ public class ControllerVidSelection {
         window.setSpacing(10);
 
         mainStage = new Stage();
-
+        model.addMainStage(mainStage);
         mainStage.setScene(new Scene(window, 1000, 800));
         mainStage.show();
     }

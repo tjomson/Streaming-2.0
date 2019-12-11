@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.application.Application?>
+<?import javafx.fxml.FXMLLoader?>
+<?import javafx.geometry.Insets?>
+<?import javafx.geometry.Pos?>
+<?import javafx.scene.Parent?>
+<?import javafx.scene.Scene?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.stage.Stage?>
+<?import javafx.scene.control.Label?>
+
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerStartScreen" id="gridPane">
+
+
+    <Label fx:id="Logo"  text="GOAT" />
+    <Button fx:id="guestButton" text="Continue as guest" onAction="#goToVidSelection"/>
+    <Button fx:id="goToChooseUserButton" text="Sign in as user" onAction="#goToChooseUser"/>
+
+
+
+</VBox>
