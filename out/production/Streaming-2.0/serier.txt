@@ -19,7 +19,7 @@ The Walking Dead; 2010- ; Drama, Horror, Sci-fi; 8,4; 1-6, 2-13, 3-16, 4-16, 5-1
 The Wire; 2001-2008; Crime, Drama, Thriller; 9,3; 1-13, 2-12, 3-12, 4-13, 5-10; 
 Welt Am Draht; 1973 ; Crime, Mystery, Sci-fi; 7,9; 1-2;
 House Of Cards; 2013-2018; Drama; 8,9; 1-13, 2-13, 3-13, 4-13, 5-13, 6-8;
-Fargo; 2014- ; Crime, Drama, Thriller; 9,0; 1-10; 2-10; 3-10;
+Fargo; 2014- ; Crime, Drama, Thriller; 9,0; 1-10, 2-10, 3-10;
 Angel; 1999-2004; Action, Drama, Fantasy; 8,0; 1-22, 2-22, 3-22, 4-22, 5-22; 
 V; 1984-1985; Action, Adventure, Sci-fi; 7,3; 1-13;
 Jessica Jones; 2015- ; Action, Crime, Drama; 8,1; 1-13, 2-13;

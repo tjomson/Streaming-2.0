@@ -9,6 +9,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -27,10 +29,8 @@ public class ControllerVidSelection {
     ComboBox<String> genreOptions = new ComboBox<>();
     CheckBox movieCheckBox = new CheckBox();
     CheckBox seriesCheckBox = new CheckBox();
-    Button applyButton = new Button("Apply");
     Button changeUserButton = new Button("Change user");
     Stage mainStage;
-    Stage restartStage;
 
     public void openStartScene() throws IOException {
 
@@ -40,7 +40,7 @@ public class ControllerVidSelection {
         flowPane.setVgap(10);
         flowPane.setHgap(10);
 
-        List<Video> videos = new SearchEngine().getSearchItems("","Title","All",true,true);
+        List<Video> videos = new SearchEngine().getSearchItems("","Title: A-Z","All",true,true);
 
         for (Video video : videos) {
             VBox vBox = video.getVideoVBox();
@@ -53,28 +53,35 @@ public class ControllerVidSelection {
 
         VBox window = new VBox();
 
-        Label userNameLabel = new Label("You are logged in as: " + model.getUserName());
+        Label userNameLabel = new Label(" You are logged in as: " + model.getUserName());
 
         HBox topBar = new HBox();
 
+        topBar.setSpacing(10.0);
 
-        applyButton.setOnAction(new EventHandler<ActionEvent>() {
+        searchField.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    flowPane.getChildren().clear();
-                    List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected());
-                    for(Video video : searchedVideos) {
-                        VBox vBox = video.getVideoVBox();
-                        flowPane.getChildren().add(vBox);
-                    }
-
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+            public void handle(KeyEvent keyEvent) {
+                hygge(flowPane);
             }
         });
+
+        movieCheckBox.setOnAction(actionEvent -> {
+            hygge(flowPane);
+        });
+
+        seriesCheckBox.setOnAction(actionEvent -> {
+            hygge(flowPane);
+        });
+
+        genreOptions.setOnAction(actionEvent -> {
+            hygge(flowPane);
+        });
+
+        sortingOptions.setOnAction(actionEvent -> {
+            hygge(flowPane);
+        });
+
         changeUserButton.setOnAction(actionEvent -> {
             ControllerStartScreen c = new ControllerStartScreen();
             try {
@@ -85,7 +92,7 @@ public class ControllerVidSelection {
             }
         });
 
-        sortingOptions.getItems().addAll("Title","Year","Rating");
+        sortingOptions.getItems().addAll("Title: A-Z","Title: Z-A","Year: new-old","Year: old-new","Rating: best-worst","Rating: worst-best");
         sortingOptions.getSelectionModel().select(0);
 
         List<String> genres = new GenreChecker().getGenreList();
@@ -97,17 +104,19 @@ public class ControllerVidSelection {
         seriesCheckBox.setSelected(true);
 
         topBar.getChildren().addAll(
-                new Label("Search for title "),
+                new Label(" Search for title:"),
                 searchField,
-                new Label("   Sort by "),
+                new Label(" Sort by:"),
                 sortingOptions,
-                new Label("    Genres "),
+                new Label(" Genres:"),
                 genreOptions,
-                new Label("    Show movies "),
+
+
+                new Label(" Show movies"),
                 movieCheckBox,
-                new Label("    Show series "),
+                new Label(" Show series"),
+
                 seriesCheckBox,
-                applyButton,
                 changeUserButton);
 
         window.getChildren().addAll(userNameLabel,topBar,scrollPane);
@@ -117,6 +126,21 @@ public class ControllerVidSelection {
         model.addMainStage(mainStage);
         mainStage.setScene(new Scene(window, 1000, 800));
         mainStage.show();
+    }
+
+    public void hygge(FlowPane flowPane){
+        try {
+            flowPane.getChildren().clear();
+            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected());
+            for(Video video : searchedVideos) {
+                VBox vBox = video.getVideoVBox();
+                flowPane.getChildren().add(vBox);
+            }
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }
