@@ -41,7 +41,7 @@ public class ControllerVidSelection {
         flowPane.setVgap(10);
         flowPane.setHgap(10);
 
-        List<Video> videos = new SearchEngine().getSearchItems("","Title","All",true,true);
+        List<Video> videos = new SearchEngine().getSearchItems("","Title, A-Z","All",true,true);
 
         for (Video video : videos) {
             VBox vBox = video.getVideoVBox();
@@ -97,7 +97,7 @@ public class ControllerVidSelection {
             }
         });
 
-        sortingOptions.getItems().addAll("Title","Year","Rating");
+        sortingOptions.getItems().addAll("Title, A-Z","Title, Z-A","Year, newest","Year, oldest","Rating, best","Rating, worst");
         sortingOptions.getSelectionModel().select(0);
 
         List<String> genres = new GenreChecker().getGenreList();

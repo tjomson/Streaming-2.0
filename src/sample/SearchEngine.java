@@ -36,14 +36,23 @@ public class SearchEngine {
 
         searchList.retainAll(genreList);
 
-        if (sortText.equals("Title")) {
+        if (sortText.equals("Title, A-Z")) {
             searchList.sort(Comparator.comparing(Video::getTitle));
         }
-        if (sortText.equals("Year")) {
+        if (sortText.equals("Title, Z-A")) {
+            searchList.sort(Comparator.comparing(Video::getTitle).reversed());
+        }
+        if (sortText.equals("Year, newest")) {
             searchList.sort(Comparator.comparing(Video::getYear).reversed());
         }
-        if (sortText.equals("Rating")) {
+        if (sortText.equals("Year, oldest")) {
+            searchList.sort(Comparator.comparing(Video::getYear));
+        }
+        if (sortText.equals("Rating, best")) {
             searchList.sort(Comparator.comparing(Video::getRating).reversed());
+        }
+        if (sortText.equals("Rating, worst")) {
+            searchList.sort(Comparator.comparing(Video::getRating));
         }
 
         return searchList;
