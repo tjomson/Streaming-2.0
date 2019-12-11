@@ -30,4 +30,7 @@ public class Series extends Video{
     public int getEndYear(){
         return endYear;
     }
+    public Map<Integer,Integer> getSeasons(){
+        return seasons;
+    }
 }

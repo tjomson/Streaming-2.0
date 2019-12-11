@@ -84,7 +84,16 @@ public class ControllerVidSelection {
         sortingOptions.getItems().addAll("Title: A-Z","Title: Z-A","Year: new-old","Year: old-new","Rating: best-worst","Rating: worst-best");
         sortingOptions.getSelectionModel().select(0);
 
-        List<String> genres = new GenreChecker().getGenreList();
+        List<String> genres = new ArrayList<>();
+
+        for(Video video : videos) {
+            for(String genre : video.getGenres()){
+                if(!genres.contains(genre)){
+                    genres.add(genre);
+                }
+            }
+        }
+
         genreOptions.getItems().add("All");
         genreOptions.getItems().addAll(genres);
         genreOptions.getSelectionModel().select(0);
