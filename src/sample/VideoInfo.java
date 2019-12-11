@@ -13,8 +13,11 @@ import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -45,6 +48,7 @@ public class VideoInfo extends Application {
         VBox infoBox = new VBox();
         VBox window = new VBox();
         infoBox.setSpacing(20);
+        window.setSpacing(20);
 
         FileInputStream f;
         if (video instanceof Movie) {
@@ -81,7 +85,19 @@ public class VideoInfo extends Application {
 
         imageInfoBox.getChildren().addAll(imageView,infoBox);
 
-        window.getChildren().add(imageInfoBox);
+
+
+        File videoSource = new File("video example.mp4");
+        Media media = new Media(videoSource.toURI().toString());
+        MediaPlayer mediaPlayer = new MediaPlayer(media);
+        MediaView mediaView = new MediaView(mediaPlayer);
+
+        mediaPlayer.setAutoPlay(true);
+
+        //Mangler event handler
+        Button playButton = new Button("Play");
+
+        window.getChildren().addAll(mediaView,imageInfoBox);
 
 
         if(video instanceof Series){
@@ -108,7 +124,7 @@ public class VideoInfo extends Application {
 
 
         stage.setTitle("Goat");
-        stage.setScene(new Scene(window, 500, 500));
+        stage.setScene(new Scene(window, 700, 900));
         stage.show();
     }
 }
