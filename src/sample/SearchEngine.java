@@ -2,32 +2,10 @@ package sample;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 public class SearchEngine {
-
-    public List<Video> getGenreVideos(List<Video> videos, String genre){
-        List<Video> genreList = new ArrayList<>();
-        for (Video video : videos){
-            for(String string : video.getGenres()){
-                if(string.equals(genre) || genre.equals("All")){
-                    genreList.add(video);
-                }
-            }
-        }
-
-        return genreList;
-    }
-
-    public List<Video> getSearchWordVideos(List<Video> videos, String searchWord){
-        List<Video> searchWordList = new ArrayList<>();
-        for(Video video : videos){
-            if(video.getTitle().toLowerCase().contains(searchWord.toLowerCase())){
-                searchWordList.add(video);
-            }
-        }
-        return searchWordList;
-    }
 
     public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries) throws IOException {
 
@@ -40,12 +18,33 @@ public class SearchEngine {
         if(showSeries) {
             videos.addAll(series);
         }
-        List<Video> genreList = getGenreVideos(videos,genreText);
-        List<Video> searchList = getSearchWordVideos(videos, searchText);
+        List<Video> genreList = new ArrayList<>();
+        for (Video video : videos){
+            for(String string : video.getGenres()){
+                if(string.equals(genreText) || genreText.equals("All")){
+                    genreList.add(video);
+                }
+            }
+        }
+
+        List<Video> searchList = new ArrayList<>();
+        for(Video video : videos){
+            if(video.getTitle().toLowerCase().contains(searchText.toLowerCase())){
+                searchList.add(video);
+            }
+        }
 
         searchList.retainAll(genreList);
 
-        new Arranger().arrange(searchList,sortText);
+        if (sortText.equals("Title")) {
+            searchList.sort(Comparator.comparing(Video::getTitle));
+        }
+        if (sortText.equals("Year")) {
+            searchList.sort(Comparator.comparing(Video::getYear).reversed());
+        }
+        if (sortText.equals("Rating")) {
+            searchList.sort(Comparator.comparing(Video::getRating).reversed());
+        }
 
         return searchList;
     }
