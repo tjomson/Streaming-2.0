@@ -31,7 +31,6 @@ public class ControllerVidSelection {
     CheckBox seriesCheckBox = new CheckBox();
     Button changeUserButton = new Button("Change user");
     Stage mainStage;
-    Stage restartStage;
 
     public void openStartScene() throws IOException {
 
