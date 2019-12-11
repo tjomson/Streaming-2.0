@@ -40,7 +40,7 @@ public class ControllerVidSelection {
         flowPane.setVgap(10);
         flowPane.setHgap(10);
 
-        List<Video> videos = new SearchEngine().getSearchItems("","Title, A-Z","All",true,true);
+        List<Video> videos = new SearchEngine().getSearchItems("","Title: A-Z","All",true,true);
 
         for (Video video : videos) {
             VBox vBox = video.getVideoVBox();
@@ -53,9 +53,11 @@ public class ControllerVidSelection {
 
         VBox window = new VBox();
 
-        Label userNameLabel = new Label("You are logged in as: " + model.getUserName());
+        Label userNameLabel = new Label(" You are logged in as: " + model.getUserName());
 
         HBox topBar = new HBox();
+
+        topBar.setSpacing(10.0);
 
         searchField.setOnKeyTyped(new EventHandler<KeyEvent>() {
             @Override
@@ -64,18 +66,12 @@ public class ControllerVidSelection {
             }
         });
 
-        movieCheckBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                hygge(flowPane);
-            }
+        movieCheckBox.setOnAction(actionEvent -> {
+            hygge(flowPane);
         });
 
-        seriesCheckBox.setOnMouseClicked(new EventHandler<MouseEvent>() {
-            @Override
-            public void handle(MouseEvent mouseEvent) {
-                hygge(flowPane);
-            }
+        seriesCheckBox.setOnAction(actionEvent -> {
+            hygge(flowPane);
         });
 
         genreOptions.setOnAction(actionEvent -> {
@@ -96,7 +92,7 @@ public class ControllerVidSelection {
             }
         });
 
-        sortingOptions.getItems().addAll("Title, A-Z","Title, Z-A","Year, newest","Year, oldest","Rating, best","Rating, worst");
+        sortingOptions.getItems().addAll("Title: A-Z","Title: Z-A","Year: new-old","Year: old-new","Rating: best-worst","Rating: worst-best");
         sortingOptions.getSelectionModel().select(0);
 
         List<String> genres = new GenreChecker().getGenreList();
@@ -108,15 +104,18 @@ public class ControllerVidSelection {
         seriesCheckBox.setSelected(true);
 
         topBar.getChildren().addAll(
-                new Label("Search for title "),
+                new Label(" Search for title:"),
                 searchField,
-                new Label("   Sort by "),
+                new Label(" Sort by:"),
                 sortingOptions,
-                new Label("    Genres "),
+                new Label(" Genres:"),
                 genreOptions,
-                new Label("    Show movies "),
+
+
+                new Label(" Show movies"),
                 movieCheckBox,
-                new Label("    Show series "),
+                new Label(" Show series"),
+
                 seriesCheckBox,
                 changeUserButton);
 
