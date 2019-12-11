@@ -1,5 +1,14 @@
 package sample;
 
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class Video {
     protected String title;
     protected int year;
@@ -12,6 +21,53 @@ public class Video {
         this.genres = genres;
         this.rating = rating;
 
+    }
+
+    public VBox getVideoVBox() throws FileNotFoundException {
+
+        FileInputStream f;
+        if (this instanceof Movie) {
+            f = new FileInputStream("Billeder/" + this.getTitle() + ".jpg");
+        } else {
+            f = new FileInputStream("Serier - billeder/" + this.getTitle() + ".jpg");
+        }
+        Image image = new Image(f);
+
+        VBox vBox = new VBox();
+        vBox.setPrefWidth(140);
+        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
+        vBox.setBorder(border);
+
+        vBox.getChildren().add(new ImageView(image));
+        Label titleLabel = new Label(this.getTitle());
+        titleLabel.setWrapText(true);
+        vBox.getChildren().add(titleLabel);
+        Label yearLabel;
+
+        if (this instanceof Series) {
+            Series series1 = (Series) this;
+            String endYearString;
+            if (series1.getEndYear() == 0) {
+                endYearString = "";
+            } else {
+                endYearString = series1.getEndYear() + "";
+            }
+            yearLabel = new Label(this.getYear() + "-" + endYearString);
+        } else {
+            yearLabel = new Label("" + this.getYear());
+        }
+
+        FlowPane genreField = new FlowPane();
+
+        vBox.getChildren().add(yearLabel);
+        for (String genre : this.getGenres()) {
+            genreField.getChildren().add(new Label(genre + " "));
+        }
+
+        Label ratingLabel = new Label("" + this.getRating());
+        vBox.getChildren().addAll(genreField,ratingLabel);
+
+        return vBox;
     }
 
     public void show(){

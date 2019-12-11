@@ -43,7 +43,7 @@ public class ControllerVidSelection {
         List<Video> videos = new SearchEngine().getSearchItems("","Year","All",true,true);
 
         for (Video video : videos) {
-            VBox vBox = new VideoVBox().getVideoVBox(video);
+            VBox vBox = video.getVideoVBox();
             flowPane.getChildren().add(vBox);
         }
 
@@ -64,8 +64,8 @@ public class ControllerVidSelection {
                 try {
                     flowPane.getChildren().clear();
                     List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected());
-                    for(Video v : searchedVideos) {
-                        VBox vBox = new VideoVBox().getVideoVBox(v);
+                    for(Video video : searchedVideos) {
+                        VBox vBox = video.getVideoVBox();
                         flowPane.getChildren().add(vBox);
                     }
 

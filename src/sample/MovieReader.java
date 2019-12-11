@@ -4,7 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MovieReader extends Reader {
+public class MovieReader extends VideoReader {
 
     public List readMovies(String txtLocation) throws IOException {
         List<Video> moviesList = new ArrayList<>();

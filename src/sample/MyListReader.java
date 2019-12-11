@@ -4,12 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MyListReader extends UniversalReader {
+public class MyListReader extends Reader {
 
     public List<Movie> MyListMovies(String myListLocation, String moviesLocation) throws IOException {
 
         List<String> strings = super.findFile(myListLocation);
-        Reader mr = new MovieReader();
+        VideoReader mr = new MovieReader();
         List<Movie> myListMovies = new ArrayList<>();
         List<Movie> movieList = ((MovieReader) mr).readMovies(moviesLocation);
 
@@ -26,7 +26,7 @@ public class MyListReader extends UniversalReader {
     public List<Series> MyListSeries(String myListLocation, String seriesLocation) throws IOException {
 
         List<String> strings = super.findFile(myListLocation);
-        Reader sr = new SeriesReader();
+        VideoReader sr = new SeriesReader();
         List<Series> myListSeries = new ArrayList<>();
         List<Series> seriesList = ((SeriesReader) sr).readSeries(seriesLocation);
         for (String string : strings) {

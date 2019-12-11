@@ -6,7 +6,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class SeriesReader extends Reader{
+public class SeriesReader extends VideoReader {
 
     public List readSeries(String txtLocation) throws IOException {
         List<Video> seriesList = new ArrayList<>();

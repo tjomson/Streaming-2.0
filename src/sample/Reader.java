@@ -1,30 +1,26 @@
 package sample;
 
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Reader extends UniversalReader{
+public class Reader {
+    public List<String> findFile(String txtLocation) throws IOException {
 
-    public List readFiles(String txtLocation) throws IOException {
+        File file = new File(txtLocation);
 
-        List<String[]> splitList = new ArrayList<>();
+        BufferedReader br = new BufferedReader(
+                new InputStreamReader(
+                        new FileInputStream(file), "ISO-8859-1")); //ISO-8859-1 gør at man kan læse specielle tegn, f.eks. ä
 
-        for(String s : super.findFile(txtLocation)){
-            splitList.add(s.split(";"));
+        List<String> videoStrings;
+        videoStrings = new ArrayList<>();
+
+        String videoInfo;
+
+        while ((videoInfo = (br.readLine())) != null) { //At sætte videoInfo = br.readLine er nødvendigt, ellers læses kun hver anden linje.
+            videoStrings.add(videoInfo);
         }
-        return splitList;
-    }
-
-    public String getTitle(String[] s){
-        return s[0];
-    }
-    public String[] getGenres(String [] s){
-        return s[2].replace(" ","").split(",");
-    }
-    public double getRating(String[] s){
-        return Double.parseDouble(s[3].replace(",", "."));
+        return videoStrings;
     }
 }
-
-
