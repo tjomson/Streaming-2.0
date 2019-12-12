@@ -1,13 +1,16 @@
 package sample;
 
+import javafx.event.EventHandler;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class Video {
     protected String title;
@@ -66,6 +69,14 @@ public class Video {
 
         Label ratingLabel = new Label("" + this.getRating());
         vBox.getChildren().addAll(genreField,ratingLabel);
+
+        vBox.setOnMouseClicked(actionEvent ->{
+            try {
+                new VideoInfo().openVideoInfoScene(this);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        });
 
         return vBox;
     }

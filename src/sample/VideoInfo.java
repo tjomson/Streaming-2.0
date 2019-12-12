@@ -1,10 +1,9 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -16,32 +15,20 @@ import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 import javafx.scene.media.MediaView;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.Map;
 
-public class VideoInfo extends Application {
+public class VideoInfo {
 
-    public static void main(String[] args) {
-        launch(args);
-    }
+    Model model;
+    Stage mainStage;
 
-    @Override
-
-
-    public void start(Stage stage) throws IOException {
-        String[] xd = {"lmao","bruhhh","xddddddddd"};
-        Map<Integer,Integer> mappp = new HashMap<>();
-        for(int i = 1; i <= 7; i++){
-            mappp.put(i,i+10);
-        }
-
-        Video video = new Series("Fargo", 1337,xd,2.3,1450,mappp);
-
+    public void openVideoInfoScene(Video video) throws IOException{
+        model = Model.getInstance();
 
         HBox  imageInfoBox = new HBox();
         imageInfoBox.setSpacing(20);
@@ -73,7 +60,6 @@ public class VideoInfo extends Application {
             yearLabel = new Label("Year: " + video.getYear());
         }
 
-
         HBox genreField = new HBox();
         genreField.getChildren().add(new Label("Genres: "));
         for (String genre : video.getGenres()) {
@@ -82,9 +68,7 @@ public class VideoInfo extends Application {
 
         infoBox.getChildren().addAll(new Label("Title: " + video.getTitle()),yearLabel,genreField,new Label("Rating: " + video.getRating() + ""));
 
-
         imageInfoBox.getChildren().addAll(imageView,infoBox);
-
 
 
         File videoSource = new File("video example.mp4");
@@ -92,39 +76,82 @@ public class VideoInfo extends Application {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
 
-        mediaPlayer.setAutoPlay(true);
-
-        //Mangler event handler
         Button playButton = new Button("Play");
+        Button muteButton = new Button("Mute");
+        CheckBox addToMyList = new CheckBox();
 
-        window.getChildren().addAll(mediaView,imageInfoBox);
+        muteButton.setOnAction(actionEvent -> {
+            if(muteButton.getText().equals("Mute")){
+                mediaPlayer.setMute(true);
+                muteButton.setText("Unmute");
+            }
+            else{
+                mediaPlayer.setMute(false);
+                muteButton.setText("Mute");
+            }
+        });
 
+        HBox buttons = new HBox();
+        buttons.setSpacing(10);
+        buttons.getChildren().addAll(playButton,muteButton,new Label(" Add to My List"),addToMyList);
+
+        playButton.setOnAction(actionEvent -> {
+            if(playButton.getText().equals("Play")) {
+                mediaPlayer.play();
+                playButton.setText("Pause");
+            }
+            else{
+                mediaPlayer.pause();
+                playButton.setText("Play");
+            }
+        });
+
+        mediaPlayer.setOnEndOfMedia(() -> {
+            playButton.setText("Play");
+            mediaPlayer.seek(Duration.millis(0));
+            mediaPlayer.pause();
+        });
 
         if(video instanceof Series){
+            Label nowPlayingLabel = new Label("Episode selected: Season 1 episode 1");
+
             Series series = (Series) video;
             ScrollPane scrollPane = new ScrollPane();
             VBox seasonsBox = new VBox();
             scrollPane.setContent(seasonsBox);
             scrollPane.setFitToWidth(true);
             infoBox.getChildren().add(new Label("Number of seasons: " + series.getSeasons().size()));
-            window.getChildren().add(scrollPane);
-
 
             for(Map.Entry entry : series.getSeasons().entrySet()){
 
                 FlowPane episodesFlowPane = new FlowPane();
                 int numberOfEpisodes = (int) entry.getValue();
                 for(int i = 1; i <= numberOfEpisodes; i++){
-                    episodesFlowPane.getChildren().add(new Button("Episode " + i));
+                    Button button = new Button("Episode " + i);
+                    final int finalInt = i; //En label kan kun tage en final int.
+                    button.setOnAction(actionEvent -> {
+                                nowPlayingLabel.setText("Episode selected: Season " + entry.getKey() + " episode " + finalInt);
+                                mediaPlayer.seek(Duration.millis(0));
+                            }
+                    );
+
+                    episodesFlowPane.getChildren().add(button);
                 }
                 seasonsBox.getChildren().addAll(new Label("Season " + entry.getKey()),episodesFlowPane);
             }
+            window.getChildren().addAll(mediaView,nowPlayingLabel,buttons,imageInfoBox,scrollPane);
 
         }
+        else{
+            window.getChildren().addAll(mediaView,buttons,imageInfoBox);
+        }
 
+        mainStage = new Stage();
+        model.addMainStage(mainStage);
+        mainStage.setScene(new Scene(window, 700, 900));
+        mainStage.setTitle(video.getTitle());
+        mainStage.show();
 
-        stage.setTitle("Goat");
-        stage.setScene(new Scene(window, 700, 900));
-        stage.show();
     }
+
 }
