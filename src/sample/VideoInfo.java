@@ -76,7 +76,7 @@ public class VideoInfo {
 
         Button playButton = new Button("Play");
         Button muteButton = new Button("Mute");
-        Button addToMyList = new Button();
+        Button addToMyList = new Button("Add to My List");
 
         //TILFØJ NOGET MED MYLIST-KNAPPEN HER
 
@@ -93,7 +93,7 @@ public class VideoInfo {
 
         HBox buttons = new HBox();
         buttons.setSpacing(10);
-        buttons.getChildren().addAll(playButton,muteButton,new Label(" Add to My List"),addToMyList);
+        buttons.getChildren().addAll(playButton,muteButton,addToMyList);
 
         playButton.setOnAction(actionEvent -> {
             if(playButton.getText().equals("Play")) {
