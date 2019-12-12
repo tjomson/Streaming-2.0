@@ -81,10 +81,6 @@ public class Video {
         return vBox;
     }
 
-    public void show(){
-        System.out.print(title + " " + year + " ");
-    }
-
     public int getYear(){
         return year;
     }

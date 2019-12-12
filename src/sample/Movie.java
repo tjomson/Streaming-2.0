@@ -7,13 +7,5 @@ public class Movie extends Video{
         super(title, year, genres, rating);
     }
 
-    @Override
-    public void show() {
-        super.show();
-        for(String s : genres){
-            System.out.print(s + " ");
-        }
-        System.out.print(rating);
-        System.out.println();
-    }
+
 }

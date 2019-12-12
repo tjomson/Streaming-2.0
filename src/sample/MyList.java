@@ -14,7 +14,6 @@ public class MyList {
     }
 
     public void addVideo(Video video) {
-
             myList.add(video);
     }
 
@@ -23,13 +22,6 @@ public class MyList {
         myList.remove(video);
         } else {
             throw new noSuchVideoException("The video is not on your list.");
-        }
-    }
-
-    public void show() {
-
-        for (Video video : myList) {
-            video.show();
         }
     }
 

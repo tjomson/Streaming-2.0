@@ -1,6 +1,5 @@
 package sample;
 
-import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
@@ -70,7 +69,6 @@ public class VideoInfo {
 
         imageInfoBox.getChildren().addAll(imageView,infoBox);
 
-
         File videoSource = new File("video example.mp4");
         Media media = new Media(videoSource.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
@@ -78,7 +76,9 @@ public class VideoInfo {
 
         Button playButton = new Button("Play");
         Button muteButton = new Button("Mute");
-        CheckBox addToMyList = new CheckBox();
+        Button addToMyList = new Button();
+
+        //TILFØJ NOGET MED MYLIST-KNAPPEN HER
 
         muteButton.setOnAction(actionEvent -> {
             if(muteButton.getText().equals("Mute")){
@@ -151,7 +151,5 @@ public class VideoInfo {
         mainStage.setScene(new Scene(window, 700, 900));
         mainStage.setTitle(video.getTitle());
         mainStage.show();
-
     }
-
 }
