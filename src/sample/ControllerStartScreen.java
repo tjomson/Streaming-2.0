@@ -37,7 +37,7 @@ public class ControllerStartScreen {
 
         Parent root = FXMLLoader.load(getClass().getResource("GOAT.fxml"));
         stage.setTitle("Goat");
-        stage.setScene(new Scene(root, 400, 200));
+        stage.setScene(new Scene(root, 400, 300));
         stage.show();
 
     }
