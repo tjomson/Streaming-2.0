@@ -23,8 +23,6 @@ public class ControllerChooseUser {
     @FXML
     Button user3;
 
-    Stage vidSelection;
-
     Model model;
 
 
@@ -38,9 +36,7 @@ public class ControllerChooseUser {
             model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
-
         }
-
     }
 
     public void userClick2() throws IOException {
@@ -53,9 +49,7 @@ public class ControllerChooseUser {
             model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
-
         }
-
     }
 
     public void userClick3() throws IOException {
@@ -68,9 +62,7 @@ public class ControllerChooseUser {
             model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
-
         }
-
     }
 
     public void openStartSceneMethod() throws IOException {
@@ -99,13 +91,9 @@ public class ControllerChooseUser {
             if (model.getUser() == 3) {
                 model.addUserName(result.get());
                 user3.setText(result.get());
-
             }
         }
     }
-
-
-
 }
 
 
