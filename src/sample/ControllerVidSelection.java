@@ -50,9 +50,10 @@ public class ControllerVidSelection {
 
             Label userNameLabel = new Label(" You are logged in as: " + model.getUserName());
 
-            HBox topBar = new HBox();
+            FlowPane topBar = new FlowPane();
 
-            topBar.setSpacing(10.0);
+            topBar.setVgap(10.0);
+            topBar.setHgap(10.0);
 
             searchField.setOnKeyTyped(new EventHandler<KeyEvent>() {
                 @Override
