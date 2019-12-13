@@ -18,8 +18,6 @@ public class ControllerChooseUser {
     @FXML
     Button User3Button;
 
-    Stage vidSelection;
-
     Model model;
 
 
@@ -33,9 +31,7 @@ public class ControllerChooseUser {
             model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
-
         }
-
     }
 
     public void userClick2() throws IOException, noSuchVideoException {
@@ -48,9 +44,7 @@ public class ControllerChooseUser {
             model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
-
         }
-
     }
 
     public void userClick3() throws IOException, noSuchVideoException {
@@ -63,9 +57,7 @@ public class ControllerChooseUser {
             model.getCurrentStage().close();
         } else {
             openChangeUserWindow();
-
         }
-
     }
 
     public void openStartSceneMethod() throws IOException, noSuchVideoException {
@@ -98,14 +90,4 @@ public class ControllerChooseUser {
             }
         }
     }
-
-
-
 }
-
-
-
-
-
-
-
