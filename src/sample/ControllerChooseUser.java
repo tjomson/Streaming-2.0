@@ -25,7 +25,9 @@ public class ControllerChooseUser {
     public void userClick1() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
-        model.addUserNumber(1);
+        model.addUserID(1);
+        model.createMyList();
+
 
         if (!user1Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -38,7 +40,8 @@ public class ControllerChooseUser {
     public void userClick2() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
-        model.addUserNumber(2);
+        model.addUserID(2);
+        model.createMyList();
 
         if (!user2Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -51,7 +54,8 @@ public class ControllerChooseUser {
     public void userClick3() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
-        model.addUserNumber(3);
+        model.addUserID(3);
+        model.createMyList();
 
         if (!user3Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -100,17 +104,17 @@ public class ControllerChooseUser {
         Optional<String> result = dialog.showAndWait();
 
         if (result.isPresent()) {
-            if (model.getUserNumber() == 1) {
+            if (model.getUserID() == 1) {
                 model.addUserName(result.get());
                 user1Button.setText(result.get());
                 writeNewUser1();
             }
-            if (model.getUserNumber() == 2) {
+            if (model.getUserID() == 2) {
                 model.addUserName(result.get());
                 user2Button.setText(result.get());
                 writeNewUser2();
             }
-            if (model.getUserNumber() == 3) {
+            if (model.getUserID() == 3) {
                 model.addUserName(result.get());
                 user3Button.setText(result.get());
                 writeNewUser3();

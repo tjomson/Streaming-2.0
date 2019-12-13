@@ -5,8 +5,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
-import javafx.stage.Popup;
-import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,7 +33,7 @@ public class ControllerVidSelection {
             flowPane.setVgap(10);
             flowPane.setHgap(10);
 
-            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true,false,model.getUserNumber());
+            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true,false,model.getUserID());
 
             for (Video video : videos) {
                 VBox vBox = video.getVideoVBox();
@@ -149,7 +147,7 @@ public class ControllerVidSelection {
     public void hygge(FlowPane flowPane){
         try {
             flowPane.getChildren().clear();
-            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(),myListCheckBox.isSelected(),model.getUserNumber());
+            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(),myListCheckBox.isSelected(),model.getUserID());
             for(Video video : searchedVideos) {
                 VBox vBox = video.getVideoVBox();
                 flowPane.getChildren().add(vBox);

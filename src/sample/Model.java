@@ -1,7 +1,6 @@
 package sample;
 
 
-import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -14,6 +13,7 @@ public class Model {
     List<User> users;
     List<Movie> movies;
     List<Series> series;
+    List<Video> myList;
     private static Model model;
     int chosenUser;
     String userName;
@@ -45,7 +45,7 @@ public class Model {
         return sr.readSeries("serier.txt");
     }
 
-    public void addUserNumber(int chosenUser) {
+    public void addUserID(int chosenUser) {
         this.chosenUser = chosenUser;
     }
 
@@ -53,7 +53,7 @@ public class Model {
         userName = name;
     }
 
-    public int getUserNumber() {
+    public int getUserID() {
         return chosenUser;
     }
 
@@ -75,6 +75,11 @@ public class Model {
 
     public Stage getMainStage() {
         return mainStage;
+    }
+
+    public void createMyList() throws IOException {
+        MyList myList = new MyList(getUserID());
+
     }
 
     public void setButton1(String name) {
