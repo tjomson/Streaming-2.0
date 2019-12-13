@@ -25,9 +25,9 @@
     </ImageView>
     <Label fx:id="Logo"  text="GOAT" />
     <Label fx:id="chooseUser" text="choose user:" />
-    <Button fx:id="user1" text="New User" onAction="#userClick1" prefWidth="70" />
-    <Button fx:id="user2" text="New User" onAction="#userClick2" prefWidth="70"/>
-    <Button fx:id="user3" text="New User" onAction="#userClick3" prefWidth="70" />
+    <Button fx:id="User1Button" text="New User" onAction="#userClick1" prefWidth="70" />
+    <Button fx:id="User2Button" text="New User" onAction="#userClick2" prefWidth="70"/>
+    <Button fx:id="User3Button" text="New User" onAction="#userClick3" prefWidth="70" />
 
 
 </VBox>

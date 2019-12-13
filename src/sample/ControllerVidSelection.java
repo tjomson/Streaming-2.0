@@ -5,6 +5,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
+import javafx.stage.Popup;
+import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -22,109 +24,116 @@ public class ControllerVidSelection {
     Button changeUserButton = new Button("Change user");
     Stage mainStage;
 
-    public void openStartScene() throws IOException {
+    public void openStartScene() throws IOException, noSuchVideoException {
 
-        model = Model.getInstance();
+        try {
 
-        FlowPane flowPane = new FlowPane();
-        flowPane.setVgap(10);
-        flowPane.setHgap(10);
+            model = Model.getInstance();
 
-        List<Video> videos = new SearchEngine().getSearchItems("","Title: A-Z","All",true,true);
+            FlowPane flowPane = new FlowPane();
+            flowPane.setVgap(10);
+            flowPane.setHgap(10);
 
-        for (Video video : videos) {
-            VBox vBox = video.getVideoVBox();
-            flowPane.getChildren().add(vBox);
-        }
+            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true);
 
-        ScrollPane scrollPane = new ScrollPane();
-        scrollPane.setContent(flowPane);
-        scrollPane.setFitToWidth(true);
+            for (Video video : videos) {
+                VBox vBox = video.getVideoVBox();
+                flowPane.getChildren().add(vBox);
+            }
 
-        VBox window = new VBox();
+            ScrollPane scrollPane = new ScrollPane();
+            scrollPane.setContent(flowPane);
+            scrollPane.setFitToWidth(true);
 
-        Label userNameLabel = new Label(" You are logged in as: " + model.getUserName());
+            VBox window = new VBox();
 
-        HBox topBar = new HBox();
+            Label userNameLabel = new Label(" You are logged in as: " + model.getUserName());
 
-        topBar.setSpacing(10.0);
+            HBox topBar = new HBox();
 
-        searchField.setOnKeyTyped(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
+            topBar.setSpacing(10.0);
+
+            searchField.setOnKeyTyped(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    hygge(flowPane);
+                }
+            });
+
+            movieCheckBox.setOnAction(actionEvent -> {
                 hygge(flowPane);
-            }
-        });
+            });
 
-        movieCheckBox.setOnAction(actionEvent -> {
-            hygge(flowPane);
-        });
+            seriesCheckBox.setOnAction(actionEvent -> {
+                hygge(flowPane);
+            });
 
-        seriesCheckBox.setOnAction(actionEvent -> {
-            hygge(flowPane);
-        });
+            genreOptions.setOnAction(actionEvent -> {
+                hygge(flowPane);
+            });
 
-        genreOptions.setOnAction(actionEvent -> {
-            hygge(flowPane);
-        });
+            sortingOptions.setOnAction(actionEvent -> {
+                hygge(flowPane);
+            });
 
-        sortingOptions.setOnAction(actionEvent -> {
-            hygge(flowPane);
-        });
+            changeUserButton.setOnAction(actionEvent -> {
+                ControllerStartScreen c = new ControllerStartScreen();
+                try {
+                    c.goToChooseUser();
+                    model.getMainStage().close();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            });
 
-        changeUserButton.setOnAction(actionEvent -> {
-            ControllerStartScreen c = new ControllerStartScreen();
-            try {
-                c.goToChooseUser();
-                model.getMainStage().close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        });
+            sortingOptions.getItems().addAll("Title: A-Z", "Title: Z-A", "Year: new-old", "Year: old-new", "Rating: best-worst", "Rating: worst-best");
+            sortingOptions.getSelectionModel().select(0);
 
-        sortingOptions.getItems().addAll("Title: A-Z","Title: Z-A","Year: new-old","Year: old-new","Rating: best-worst","Rating: worst-best");
-        sortingOptions.getSelectionModel().select(0);
+            List<String> genres = new ArrayList<>();
 
-        List<String> genres = new ArrayList<>();
-
-        for(Video video : videos) {
-            for(String genre : video.getGenres()){
-                if(!genres.contains(genre)){
-                    genres.add(genre);
+            for (Video video : videos) {
+                for (String genre : video.getGenres()) {
+                    if (!genres.contains(genre)) {
+                        genres.add(genre);
+                    }
                 }
             }
+
+            genreOptions.getItems().add("All");
+            genreOptions.getItems().addAll(genres);
+            genreOptions.getSelectionModel().select(0);
+
+            movieCheckBox.setSelected(true);
+            seriesCheckBox.setSelected(true);
+
+
+            topBar.getChildren().addAll(
+                    new Label(" Search for title:"),
+                    searchField,
+                    new Label(" Sort by:"),
+                    sortingOptions,
+                    new Label(" Genres:"),
+                    genreOptions,
+
+
+                    new Label(" Show movies"),
+                    movieCheckBox,
+                    new Label(" Show series"),
+
+                    seriesCheckBox,
+                    changeUserButton);
+
+            window.getChildren().addAll(userNameLabel, topBar, scrollPane);
+            window.setSpacing(10);
+
+            mainStage = new Stage();
+            model.addMainStage(mainStage);
+            mainStage.setScene(new Scene(window, 1000, 800));
+            mainStage.show();
+
+        } catch (noSuchVideoException e) {
+            System.out.println(e.getMessage());
         }
-
-        genreOptions.getItems().add("All");
-        genreOptions.getItems().addAll(genres);
-        genreOptions.getSelectionModel().select(0);
-
-        movieCheckBox.setSelected(true);
-        seriesCheckBox.setSelected(true);
-
-        topBar.getChildren().addAll(
-                new Label(" Search for title:"),
-                searchField,
-                new Label(" Sort by:"),
-                sortingOptions,
-                new Label(" Genres:"),
-                genreOptions,
-
-
-                new Label(" Show movies"),
-                movieCheckBox,
-                new Label(" Show series"),
-
-                seriesCheckBox,
-                changeUserButton);
-
-        window.getChildren().addAll(userNameLabel,topBar,scrollPane);
-        window.setSpacing(10);
-
-        mainStage = new Stage();
-        model.addMainStage(mainStage);
-        mainStage.setScene(new Scene(window, 1000, 800));
-        mainStage.show();
     }
 
     public void hygge(FlowPane flowPane){
@@ -137,8 +146,9 @@ public class ControllerVidSelection {
             }
 
 
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException | noSuchVideoException e) {
+            Label exceptionLabel = new Label(e.getMessage());
+            flowPane.getChildren().add(exceptionLabel);
         }
     }
 

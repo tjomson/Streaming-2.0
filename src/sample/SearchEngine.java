@@ -7,7 +7,7 @@ import java.util.List;
 
 public class SearchEngine {
 
-    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries) throws IOException {
+    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries) throws IOException, noSuchVideoException {
 
         List<Video> movies = new MovieReader().readMovies("film.txt");
         List<Video> series = new SeriesReader().readSeries("serier.txt");
@@ -53,6 +53,10 @@ public class SearchEngine {
         }
         if (sortText.equals("Rating: worst-best")) {
             searchList.sort(Comparator.comparing(Video::getRating));
+        }
+
+        if (searchList.isEmpty()) {
+            throw new noSuchVideoException("We couldn't find any video matching your criteria, please try again");
         }
 
         return searchList;

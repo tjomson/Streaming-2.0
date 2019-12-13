@@ -1,39 +1,34 @@
 package sample;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.Optional;
 
 
 public class ControllerChooseUser {
 
     @FXML
-    Button user1;
+    Button User1Button;
     @FXML
-    Button user2;
+    Button User2Button;
     @FXML
-    Button user3;
+    Button User3Button;
 
     Stage vidSelection;
 
     Model model;
 
 
-    public void userClick1() throws IOException {
+    public void userClick1() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
         model.addUser(1);
 
-        if (!user1.getText().equals("New User")) {
+        if (!User1Button.getText().equals("New User")) {
             openStartSceneMethod();
             model.getCurrentStage().close();
         } else {
@@ -43,12 +38,12 @@ public class ControllerChooseUser {
 
     }
 
-    public void userClick2() throws IOException {
+    public void userClick2() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
         model.addUser(2);
 
-        if (!user2.getText().equals("New User")) {
+        if (!User2Button.getText().equals("New User")) {
             openStartSceneMethod();
             model.getCurrentStage().close();
         } else {
@@ -58,12 +53,12 @@ public class ControllerChooseUser {
 
     }
 
-    public void userClick3() throws IOException {
+    public void userClick3() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
         model.addUser(3);
 
-        if (!user3.getText().equals("New User")) {
+        if (!User3Button.getText().equals("New User")) {
             openStartSceneMethod();
             model.getCurrentStage().close();
         } else {
@@ -73,7 +68,7 @@ public class ControllerChooseUser {
 
     }
 
-    public void openStartSceneMethod() throws IOException {
+    public void openStartSceneMethod() throws IOException, noSuchVideoException {
         ControllerVidSelection c = new ControllerVidSelection();
         c.openStartScene();
     }
@@ -90,15 +85,15 @@ public class ControllerChooseUser {
         if (result.isPresent()) {
             if (model.getUser() == 1) {
                 model.addUserName(result.get());
-                user1.setText(result.get());
+                User1Button.setText(result.get());
             }
             if (model.getUser() == 2) {
                 model.addUserName(result.get());
-                user2.setText(result.get());
+                User2Button.setText(result.get());
             }
             if (model.getUser() == 3) {
                 model.addUserName(result.get());
-                user3.setText(result.get());
+                User3Button.setText(result.get());
 
             }
         }
