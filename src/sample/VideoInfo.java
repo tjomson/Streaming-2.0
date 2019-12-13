@@ -24,7 +24,7 @@ import java.util.Map;
 public class VideoInfo {
 
     Model model;
-    Stage mainStage;
+    Stage currentStage;
 
     public void openVideoInfoScene(Video video) throws IOException{
         model = Model.getInstance();
@@ -146,10 +146,10 @@ public class VideoInfo {
             window.getChildren().addAll(mediaView,buttons,imageInfoBox);
         }
 
-        mainStage = new Stage();
-        model.addMainStage(mainStage);
-        mainStage.setScene(new Scene(window, 700, 900));
-        mainStage.setTitle(video.getTitle());
-        mainStage.show();
+        currentStage = new Stage();
+        model.addCurrentStage(currentStage);
+        currentStage.setScene(new Scene(window, 700, 900));
+        currentStage.setTitle(video.getTitle());
+        currentStage.show();
     }
 }
