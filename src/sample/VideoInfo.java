@@ -79,6 +79,10 @@ public class VideoInfo {
         Button addToMyList = new Button("Add to My List");
 
         //TILFØJ NOGET MED MYLIST-KNAPPEN HER
+        addToMyList.setOnAction(actionEvent -> {
+
+        });
+
 
         muteButton.setOnAction(actionEvent -> {
             if(muteButton.getText().equals("Mute")){

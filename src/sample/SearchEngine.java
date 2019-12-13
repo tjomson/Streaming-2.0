@@ -7,11 +7,13 @@ import java.util.List;
 
 public class SearchEngine {
 
-    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries) throws IOException, noSuchVideoException {
+    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries,boolean onMyList,int userID) throws IOException, noSuchVideoException {
 
         List<Video> movies = new MovieReader().readMovies("film.txt");
         List<Video> series = new SeriesReader().readSeries("serier.txt");
+        List<Video> myListVideos = new MyList(userID).getMyList();
         List<Video> videos = new ArrayList<>();
+
         if(showMovies) {
             videos.addAll(movies);
         }
@@ -34,7 +36,11 @@ public class SearchEngine {
             }
         }
 
+
         searchList.retainAll(genreList);
+        if(onMyList) {
+            searchList.retainAll(myListVideos);
+        }
 
         if (sortText.equals("Title: A-Z")) {
             searchList.sort(Comparator.comparing(Video::getTitle));
