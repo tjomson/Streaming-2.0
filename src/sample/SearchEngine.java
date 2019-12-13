@@ -1,18 +1,45 @@
 package sample;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
 public class SearchEngine {
+    private List<Video> myListVideos = new ArrayList<>();
+
+    public void addVideoToMyList(Video video){
+        myListVideos.add(video);
+    }
+    public void removeVideoFromMyList(Video video){
+        myListVideos.remove(video);
+    }
+    public List<Video> getMyListVideos(int userID) throws IOException {
+        MyListReader myListReader = new MyListReader();
+        List<Movie> myListMovies = myListReader.myListMovies("MyListUser" + userID,"film.txt");
+        List<Series> myListSeries = myListReader.myListSeries("MyListUser" + userID, "serier.txt");
+
+        myListVideos.addAll(myListMovies);
+        myListVideos.addAll(myListSeries);
+        return myListVideos;
+    }
+    public static void listToFile(ArrayList<Video> arrayList, String filename) throws IOException {
+        PrintWriter writer = new PrintWriter(filename);
+
+        for (Video video : arrayList) {
+            writer.println(video.getTitle());
+        }
+        writer.close();
+    }
 
     public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries,boolean onMyList,int userID) throws IOException, noSuchVideoException {
 
         List<Video> movies = new MovieReader().readMovies("film.txt");
         List<Video> series = new SeriesReader().readSeries("serier.txt");
-        List<Video> myListVideos = new MyList(userID).getMyList();
         List<Video> videos = new ArrayList<>();
+
+        myListVideos = getMyListVideos(userID);
 
         if(showMovies) {
             videos.addAll(movies);
@@ -38,9 +65,20 @@ public class SearchEngine {
 
 
         searchList.retainAll(genreList);
+
+        List<Video> finalList = new ArrayList<>();
+
         if(onMyList) {
-            searchList.retainAll(myListVideos);
+            for(Video v : searchList){
+                for(Video myListv : myListVideos){
+                    if(v.getTitle().equals(myListv.getTitle())){
+                        finalList.add(v);
+                    }
+                }
+            }
+            searchList.retainAll(finalList);
         }
+
 
         if (sortText.equals("Title: A-Z")) {
             searchList.sort(Comparator.comparing(Video::getTitle));

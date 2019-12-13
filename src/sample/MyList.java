@@ -13,6 +13,7 @@ public class MyList {
     public MyList(int userID) throws IOException {
         myList = new ArrayList<>();
         this.userID = userID;
+
     }
 
     public List<Video> getMyList(){
