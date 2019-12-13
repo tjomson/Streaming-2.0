@@ -14,14 +14,20 @@
 <?import javafx.stage.Stage?>
 <?import javafx.scene.control.Label?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerChooseUser" id="gridPane">
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.image.Image?>
+<VBox prefHeight="1000.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerChooseUser" spacing="10" id="gridPane">
 
-
+    <ImageView fx:id="im" fitHeight="100" fitWidth="300" >
+        <image>
+            <Image url = "/goatImage.png"/>
+        </image>
+    </ImageView>
     <Label fx:id="Logo"  text="GOAT" />
     <Label fx:id="chooseUser" text="choose user:" />
-    <Button fx:id="user1" text="New User" onAction="#userClick1" />
-    <Button fx:id="user2" text="New User" onAction="#userClick2"/>
-    <Button fx:id="user3" text="New User" onAction="#userClick3" />
+    <Button fx:id="user1" text="New User" onAction="#userClick1" prefWidth="70" />
+    <Button fx:id="user2" text="New User" onAction="#userClick2" prefWidth="70"/>
+    <Button fx:id="user3" text="New User" onAction="#userClick3" prefWidth="70" />
 
 
 </VBox>

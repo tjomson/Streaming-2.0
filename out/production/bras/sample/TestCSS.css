@@ -1,0 +1,10 @@
+.my-rect {-fx-fill: red}
+
+.root {
+    -fx-background-color: black;
+
+}
+
+.root {
+    -fx-border-color: red;
+}
