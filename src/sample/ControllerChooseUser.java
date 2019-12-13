@@ -103,15 +103,17 @@ public class ControllerChooseUser {
             if (model.getUserNumber() == 1) {
                 model.addUserName(result.get());
                 user1Button.setText(result.get());
+                writeNewUser1();
             }
             if (model.getUserNumber() == 2) {
                 model.addUserName(result.get());
                 user2Button.setText(result.get());
+                writeNewUser2();
             }
             if (model.getUserNumber() == 3) {
                 model.addUserName(result.get());
                 user3Button.setText(result.get());
-
+                writeNewUser3();
             }
         }
     }
