@@ -3,7 +3,6 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
-import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Optional;
@@ -24,7 +23,7 @@ public class ControllerChooseUser {
     public void userClick1() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
-        model.addUser(1);
+        model.addUserNumber(1);
 
         if (!User1Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -37,7 +36,7 @@ public class ControllerChooseUser {
     public void userClick2() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
-        model.addUser(2);
+        model.addUserNumber(2);
 
         if (!User2Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -50,7 +49,7 @@ public class ControllerChooseUser {
     public void userClick3() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
-        model.addUser(3);
+        model.addUserNumber(3);
 
         if (!User3Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -75,15 +74,15 @@ public class ControllerChooseUser {
         Optional<String> result = dialog.showAndWait();
 
         if (result.isPresent()) {
-            if (model.getUser() == 1) {
+            if (model.getUserNumber() == 1) {
                 model.addUserName(result.get());
                 User1Button.setText(result.get());
             }
-            if (model.getUser() == 2) {
+            if (model.getUserNumber() == 2) {
                 model.addUserName(result.get());
                 User2Button.setText(result.get());
             }
-            if (model.getUser() == 3) {
+            if (model.getUserNumber() == 3) {
                 model.addUserName(result.get());
                 User3Button.setText(result.get());
 

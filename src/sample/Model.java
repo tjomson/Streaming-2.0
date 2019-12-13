@@ -45,7 +45,7 @@ public class Model {
         return sr.readSeries("serier.txt");
     }
 
-    public void addUser(int chosenUser) {
+    public void addUserNumber(int chosenUser) {
         this.chosenUser = chosenUser;
     }
 
@@ -53,7 +53,7 @@ public class Model {
         userName = name;
     }
 
-    public int getUser() {
+    public int getUserNumber() {
         return chosenUser;
     }
 
