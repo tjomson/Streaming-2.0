@@ -21,6 +21,7 @@ public class ControllerVidSelection {
     ComboBox<String> genreOptions = new ComboBox<>();
     CheckBox movieCheckBox = new CheckBox();
     CheckBox seriesCheckBox = new CheckBox();
+    CheckBox myListCheckBox = new CheckBox();
     Button changeUserButton = new Button("Change user");
     Stage mainStage;
 
@@ -34,7 +35,7 @@ public class ControllerVidSelection {
             flowPane.setVgap(10);
             flowPane.setHgap(10);
 
-            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true);
+            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true,false,model.getUserNumber());
 
             for (Video video : videos) {
                 VBox vBox = video.getVideoVBox();
@@ -67,6 +68,10 @@ public class ControllerVidSelection {
             seriesCheckBox.setOnAction(actionEvent -> {
                 hygge(flowPane);
             });
+            myListCheckBox.setOnAction(actionEvent -> {
+                hygge(flowPane);
+            });
+
 
             genreOptions.setOnAction(actionEvent -> {
                 hygge(flowPane);
@@ -75,6 +80,7 @@ public class ControllerVidSelection {
             sortingOptions.setOnAction(actionEvent -> {
                 hygge(flowPane);
             });
+
 
             changeUserButton.setOnAction(actionEvent -> {
                 ControllerStartScreen c = new ControllerStartScreen();
@@ -106,6 +112,7 @@ public class ControllerVidSelection {
             movieCheckBox.setSelected(true);
             seriesCheckBox.setSelected(true);
 
+            myListCheckBox.setSelected(false);
 
             topBar.getChildren().addAll(
                     new Label(" Search for title:"),
@@ -121,6 +128,8 @@ public class ControllerVidSelection {
                     new Label(" Show series"),
 
                     seriesCheckBox,
+                    new Label(" On my list"),
+                    myListCheckBox,
                     changeUserButton);
 
             window.getChildren().addAll(userNameLabel, topBar, scrollPane);
@@ -128,7 +137,7 @@ public class ControllerVidSelection {
 
             mainStage = new Stage();
             model.addMainStage(mainStage);
-            mainStage.setScene(new Scene(window, 1000, 800));
+            mainStage.setScene(new Scene(window, 1200, 600));
             mainStage.show();
 
         } catch (noSuchVideoException e) {
@@ -139,7 +148,7 @@ public class ControllerVidSelection {
     public void hygge(FlowPane flowPane){
         try {
             flowPane.getChildren().clear();
-            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected());
+            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(),myListCheckBox.isSelected(),model.getUserNumber());
             for(Video video : searchedVideos) {
                 VBox vBox = video.getVideoVBox();
                 flowPane.getChildren().add(vBox);

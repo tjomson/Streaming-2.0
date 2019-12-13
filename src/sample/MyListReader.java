@@ -6,7 +6,7 @@ import java.util.List;
 
 public class MyListReader extends Reader {
 
-    public List<Movie> MyListMovies(String myListLocation, String moviesLocation) throws IOException {
+    public List<Movie> myListMovies(String myListLocation, String moviesLocation) throws IOException {
 
         List<String> strings = super.findFile(myListLocation);
         VideoReader mr = new MovieReader();
@@ -23,7 +23,9 @@ public class MyListReader extends Reader {
         return myListMovies;
 
     }
-    public List<Series> MyListSeries(String myListLocation, String seriesLocation) throws IOException {
+
+
+    public List<Series> myListSeries(String myListLocation, String seriesLocation) throws IOException {
 
         List<String> strings = super.findFile(myListLocation);
         VideoReader sr = new SeriesReader();
