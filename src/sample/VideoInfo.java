@@ -79,7 +79,7 @@ public class VideoInfo {
         Button muteButton = new Button("Mute");
         Button addToMyListButton = new Button();
 
-        boolean alreadyAdded = false;
+        /*boolean alreadyAdded = false;
         for(Video v : new SearchEngine().getMyListVideos(model.getUserID())){
             if(video.getTitle().equals(v.getTitle())){
                 alreadyAdded = true;
@@ -116,7 +116,7 @@ public class VideoInfo {
             }
 
         });
-
+*/
 
         muteButton.setOnAction(actionEvent -> {
             if(muteButton.getText().equals("Mute")){

@@ -8,12 +8,11 @@ public class MyList {
 
 
     private List<Video> myList;
-    int userID;
+    int userListID;
 
-    public MyList(int userID) throws IOException {
+    public MyList(int userListID) throws IOException {
         myList = new ArrayList<>();
-        this.userID = userID;
-        System.out.println("UserID= " + userID);
+        this.userListID = userListID;
 
     }
 
@@ -21,8 +20,8 @@ public class MyList {
         return myList;
     }
 
-    public int getUserID() {
-        return userID;
+    public int getUserListID() {
+        return userListID;
     }
 
     public void addVideo(Video video) {

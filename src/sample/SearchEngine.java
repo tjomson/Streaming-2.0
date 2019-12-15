@@ -7,7 +7,7 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SearchEngine {
-    private List<Video> myListVideos = new ArrayList<>();
+    private List<Video> myListVideos;
 
     public void addVideoToMyList(Video video){
         myListVideos.add(video);
@@ -15,15 +15,7 @@ public class SearchEngine {
     public void removeVideoFromMyList(Video video){
         myListVideos.remove(video);
     }
-    public List<Video> getMyListVideos(int userID) throws IOException {
-        MyListReader myListReader = new MyListReader();
-        List<Movie> myListMovies = myListReader.myListMovies("MyListUser" + userID,"film.txt");
-        List<Series> myListSeries = myListReader.myListSeries("MyListUser" + userID, "serier.txt");
 
-        myListVideos.addAll(myListMovies);
-        myListVideos.addAll(myListSeries);
-        return myListVideos;
-    }
     public static void listToFile(ArrayList<Video> arrayList, String filename) throws IOException {
         PrintWriter writer = new PrintWriter(filename);
 
@@ -39,7 +31,9 @@ public class SearchEngine {
         List<Video> series = new SeriesReader().readSeries("serier.txt");
         List<Video> videos = new ArrayList<>();
 
-        myListVideos = getMyListVideos(userID);
+        ControllerChooseUser c = new ControllerChooseUser();
+
+        myListVideos = (List<Video>) c.myList;
 
         if(showMovies) {
             videos.addAll(movies);

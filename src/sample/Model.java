@@ -77,10 +77,6 @@ public class Model {
         return mainStage;
     }
 
-    public void createMyList() throws IOException {
-        MyList myList = new MyList(getUserID());
-
-    }
 
     public void setButton1(String name) {
         user1ButtonString = name;

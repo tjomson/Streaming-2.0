@@ -7,6 +7,7 @@ import javafx.scene.control.TextInputDialog;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 import java.util.Optional;
 
 
@@ -20,13 +21,14 @@ public class ControllerChooseUser {
     Button user3Button;
 
     Model model;
+    MyList myList;
 
 
     public void userClick1() throws IOException, noSuchVideoException {
 
         model = Model.getInstance();
         model.addUserID(1);
-        model.createMyList();
+        myList = new MyList(1);
 
 
         if (!user1Button.getText().equals("New User")) {
@@ -41,7 +43,7 @@ public class ControllerChooseUser {
 
         model = Model.getInstance();
         model.addUserID(2);
-        model.createMyList();
+        myList = new MyList(2);
 
         if (!user2Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -55,7 +57,7 @@ public class ControllerChooseUser {
 
         model = Model.getInstance();
         model.addUserID(3);
-        model.createMyList();
+        myList = new MyList(3);
 
         if (!user3Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -121,4 +123,5 @@ public class ControllerChooseUser {
             }
         }
     }
+
 }
