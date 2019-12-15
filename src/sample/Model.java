@@ -107,7 +107,14 @@ public class Model {
         myList.add(video);
     }
     public void removeFromMyList(Video video){
-        myList.remove(video);
+
+        List<Video> temporaryList = new ArrayList<>();
+        for(Video v : getMyList()){
+            if(!v.getTitle().equals(video.getTitle())){
+                temporaryList.add(v);
+            }
+        }
+        myList = temporaryList;
     }
 }
 

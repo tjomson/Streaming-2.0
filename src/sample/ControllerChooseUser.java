@@ -23,8 +23,6 @@ public class ControllerChooseUser {
     String user1Name = "New User1";
 
     Model model;
-    MyList myList;
-
 
     public void userClick1() throws IOException, noSuchVideoException, loggedInAsGuestException {
 
