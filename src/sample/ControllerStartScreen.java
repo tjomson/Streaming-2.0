@@ -38,6 +38,8 @@ public class ControllerStartScreen {
         model.getCurrentStage().close();
         Stage stage = new Stage();
 
+        stage.getIcons().add(new Image("/blackSquare.png"));
+
         model.addCurrentStage(stage);
 
         Parent root = FXMLLoader.load(getClass().getResource("GOAT.fxml"));

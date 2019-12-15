@@ -27,7 +27,8 @@ public class goatdemo extends Application {
             model.addCurrentStage(stage);
 
             Parent root = FXMLLoader.load(getClass().getResource("StartScreen.fxml"));
-            stage.setTitle("Goat");
+            stage.setTitle("GOAT");
+            stage.getIcons().add(new Image("/blackSquare.png"));
             Scene scene = new Scene(root, 400, 300);
             stage.setScene(scene);
 

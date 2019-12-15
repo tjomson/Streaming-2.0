@@ -4,6 +4,7 @@ import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
@@ -138,6 +139,8 @@ public class ControllerVidSelection {
             window.setSpacing(10);
 
             mainStage = new Stage();
+            mainStage.setTitle("GOAT");
+            mainStage.getIcons().add(new Image("/blackSquare.png"));
             model.addMainStage(mainStage);
             mainStage.setScene(new Scene(window, 1200, 600));
             mainStage.show();
