@@ -103,6 +103,7 @@ public class ControllerChooseUser {
         dialog.setTitle("Create new user");
         dialog.setHeaderText("GOAT UP YOUR LIFE");
         dialog.setContentText("Enter your name");
+        dialog.setGraphic(null);
         Optional<String> result = dialog.showAndWait();
 
         if (result.isPresent()) {

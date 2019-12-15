@@ -25,7 +25,7 @@
         </image>
     </ImageView>
 
-    <Button fx:id="guestButton" text="Continue as guest" onAction="#goToVidSelection" alignment="CENTER"/>
-    <Button fx:id="goToChooseUserButton" text="Sign in as user" onAction="#goToChooseUser"/>
+    <Button fx:id="guestButton" text="Continue as guest" onAction="#goToVidSelection" prefWidth="120"/>
+    <Button fx:id="goToChooseUserButton" text="Sign in as user" onAction="#goToChooseUser" prefWidth="120"/>
 
 </VBox>
