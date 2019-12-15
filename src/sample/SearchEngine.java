@@ -26,7 +26,7 @@ public class SearchEngine {
         writer.close();
     }
 
-    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries,boolean onMyList,int userID) throws IOException, noSuchVideoException {
+    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries,boolean onMyList,int userID) throws IOException, noSuchVideoException, loggedInAsGuestException {
 
         model = Model.getInstance();
 
@@ -62,6 +62,9 @@ public class SearchEngine {
         List<Video> finalList = new ArrayList<>();
 
         if(onMyList) {
+            if (model.getUserID()==0) {
+                throw new loggedInAsGuestException("This feature is not available when you're logged in as a guest. You can log in as user by clicking 'Change user' in the upper right corner.");
+            }
             for(Video v : searchList){
                 for(Video myListv : model.getMyList()){
                     if(v.getTitle().equals(myListv.getTitle())){

@@ -8,4 +8,8 @@ public class loggedInAsGuestException extends Exception {
         this.message = message;
     }
 
+    public String getMessage() {
+        return message;
+    }
+
 }

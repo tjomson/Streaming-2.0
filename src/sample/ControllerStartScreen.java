@@ -21,7 +21,7 @@ public class ControllerStartScreen {
 
     Model model;
 
-    public void goToVidSelection() throws IOException, noSuchVideoException {
+    public void goToVidSelection() throws IOException, noSuchVideoException, loggedInAsGuestException {
         model = Model.getInstance();
         model.addUserName("guest");
         model.addUserID(0);

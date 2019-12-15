@@ -26,7 +26,7 @@ public class ControllerChooseUser {
     MyList myList;
 
 
-    public void userClick1() throws IOException, noSuchVideoException {
+    public void userClick1() throws IOException, noSuchVideoException, loggedInAsGuestException {
 
         model = Model.getInstance();
         model.addUserID(1);
@@ -41,7 +41,7 @@ public class ControllerChooseUser {
         }
     }
 
-    public void userClick2() throws IOException, noSuchVideoException {
+    public void userClick2() throws IOException, noSuchVideoException, loggedInAsGuestException {
 
         model = Model.getInstance();
         model.addUserID(2);
@@ -55,7 +55,7 @@ public class ControllerChooseUser {
         }
     }
 
-    public void userClick3() throws IOException, noSuchVideoException {
+    public void userClick3() throws IOException, noSuchVideoException, loggedInAsGuestException {
 
         model = Model.getInstance();
         model.addUserID(3);
@@ -69,7 +69,7 @@ public class ControllerChooseUser {
         }
     }
 
-    public void openStartSceneMethod() throws IOException, noSuchVideoException {
+    public void openStartSceneMethod() throws IOException, noSuchVideoException, loggedInAsGuestException {
         ControllerVidSelection c = new ControllerVidSelection();
         c.openStartScene();
     }

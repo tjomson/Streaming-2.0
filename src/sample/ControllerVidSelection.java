@@ -4,8 +4,10 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.*;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,7 @@ public class ControllerVidSelection {
     Button changeUserButton = new Button("Change user");
     Stage mainStage;
 
-    public void openStartScene() throws IOException, noSuchVideoException {
+    public void openStartScene() throws IOException, noSuchVideoException, loggedInAsGuestException {
 
         try {
 
@@ -33,7 +35,7 @@ public class ControllerVidSelection {
             flowPane.setVgap(10);
             flowPane.setHgap(10);
 
-            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true,false,model.getUserID());
+            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true, false, model.getUserID());
 
             for (Video video : videos) {
                 VBox vBox = video.getVideoVBox();
@@ -144,20 +146,21 @@ public class ControllerVidSelection {
         }
     }
 
-    public void hygge(FlowPane flowPane){
+    public void hygge(FlowPane flowPane) {
         try {
             flowPane.getChildren().clear();
-            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(),myListCheckBox.isSelected(),model.getUserID());
-            for(Video video : searchedVideos) {
+            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(), myListCheckBox.isSelected(), model.getUserID());
+            for (Video video : searchedVideos) {
                 VBox vBox = video.getVideoVBox();
                 flowPane.getChildren().add(vBox);
             }
 
 
-        } catch (IOException | noSuchVideoException e) {
+        } catch (IOException | noSuchVideoException | loggedInAsGuestException e) {
             Label exceptionLabel = new Label(e.getMessage());
             flowPane.getChildren().add(exceptionLabel);
-        }
-    }
 
+        }
+
+    }
 }
