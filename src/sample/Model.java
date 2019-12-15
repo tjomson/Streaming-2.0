@@ -16,7 +16,7 @@ public class Model {
     List<Video> myList;
     private static Model model;
     int chosenUser;
-    String userName;
+    String userName = "New User";
 
     Stage currentStage;
     Stage mainStage;

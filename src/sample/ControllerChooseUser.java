@@ -20,6 +20,8 @@ public class ControllerChooseUser {
     @FXML
     Button user3Button;
 
+    String user1Name = "New User1";
+
     Model model;
     MyList myList;
 
@@ -28,7 +30,7 @@ public class ControllerChooseUser {
 
         model = Model.getInstance();
         model.addUserID(1);
-        myList = new MyList(1);
+        model.createMyList();
 
 
         if (!user1Button.getText().equals("New User")) {
@@ -43,7 +45,7 @@ public class ControllerChooseUser {
 
         model = Model.getInstance();
         model.addUserID(2);
-        myList = new MyList(2);
+        model.createMyList();
 
         if (!user2Button.getText().equals("New User")) {
             openStartSceneMethod();
@@ -57,7 +59,7 @@ public class ControllerChooseUser {
 
         model = Model.getInstance();
         model.addUserID(3);
-        myList = new MyList(3);
+        model.createMyList();
 
         if (!user3Button.getText().equals("New User")) {
             openStartSceneMethod();
