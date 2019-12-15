@@ -82,6 +82,7 @@ public class VideoInfo {
         addToMyListButton.setOnAction(actionEvent -> {
             if(addToMyListButton.getText().equals("Add to My List")) {
                 model.addToMyList(video);
+                addToMyListButton.setText("Remove from My List");
             }
             else{
                 model.removeFromMyList(video);
@@ -95,45 +96,6 @@ public class VideoInfo {
             addToMyListButton.setText("Add to My List");
         }
 
-
-        /*boolean alreadyAdded = false;
-        for(Video v : new SearchEngine().getMyListVideos(model.getUserID())){
-            if(video.getTitle().equals(v.getTitle())){
-                alreadyAdded = true;
-            }
-        }
-
-        if(alreadyAdded){
-            addToMyListButton.setText("Remove from My List");
-        }
-        else{
-            addToMyListButton.setText("Add to My List");
-        }
-
-        //DET HER FUNGERER IKKE FULDT UD
-        addToMyListButton.setOnAction(actionEvent -> {
-            SearchEngine s = new SearchEngine();
-            if(addToMyListButton.getText().equals("Remove from My List")){
-                s.removeVideoFromMyList(video);
-                addToMyListButton.setText("Add to My List");
-                try {
-                    s.listToFile((ArrayList<Video>) s.getMyListVideos(model.getUserID()),"MyListUser" + model.getUserID());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-            else{
-                s.addVideoToMyList(video);
-                addToMyListButton.setText("Remove from My List");
-                try {
-                    s.listToFile((ArrayList<Video>) s.getMyListVideos(model.getUserID()),"MyListUser" + model.getUserID());
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-
-        });
-*/
 
         muteButton.setOnAction(actionEvent -> {
             if(muteButton.getText().equals("Mute")){

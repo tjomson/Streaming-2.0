@@ -34,10 +34,6 @@ public class SearchEngine {
         List<Video> series = new SeriesReader().readSeries("serier.txt");
         List<Video> videos = new ArrayList<>();
 
-        ControllerChooseUser c = new ControllerChooseUser();
-
-        myListVideos = (List<Video>) c.myList;
-
         if(showMovies) {
             videos.addAll(movies);
         }
