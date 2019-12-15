@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
@@ -34,6 +35,7 @@ public class ControllerVidSelection {
             FlowPane flowPane = new FlowPane();
             flowPane.setVgap(10);
             flowPane.setHgap(10);
+            flowPane.setAlignment(Pos.CENTER);
 
             List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true, false, model.getUserID());
 
