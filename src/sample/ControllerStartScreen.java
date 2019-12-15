@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -15,6 +16,8 @@ public class ControllerStartScreen {
     Button guestButton;
     @FXML
     Button goToChooseUserButton;
+    @FXML
+    VBox vBox;
 
     Model model;
 
@@ -38,7 +41,8 @@ public class ControllerStartScreen {
 
         Parent root = FXMLLoader.load(getClass().getResource("GOAT.fxml"));
         stage.setTitle("Goat");
-        stage.setScene(new Scene(root, 400, 300));
+        Scene scene = new Scene(root, 400,300);
+        stage.setScene(scene);
         stage.show();
 
     }
