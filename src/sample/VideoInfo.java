@@ -20,6 +20,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public class VideoInfo {
@@ -79,6 +80,20 @@ public class VideoInfo {
         Button muteButton = new Button("Mute");
         Button addToMyListButton = new Button();
 
+
+        boolean isOnMyList = false;
+        for(Video v : model.getMyList()){
+            if(v.getTitle().equals(video.getTitle())){
+                isOnMyList = true;
+            }
+        }
+
+        if (isOnMyList) {
+            addToMyListButton.setText("Remove from My List");
+        } else {
+            addToMyListButton.setText("Add to My List");
+        }
+
         addToMyListButton.setOnAction(actionEvent -> {
             if(addToMyListButton.getText().equals("Add to My List")) {
                 model.addToMyList(video);
@@ -86,15 +101,11 @@ public class VideoInfo {
             }
             else{
                 model.removeFromMyList(video);
+                addToMyListButton.setText("Add to My List");
             }
         });
 
-        if(model.getMyList().contains(video)) {
-            addToMyListButton.setText("Remove from My List");
-        }
-        else{
-            addToMyListButton.setText("Add to My List");
-        }
+
 
 
         muteButton.setOnAction(actionEvent -> {
