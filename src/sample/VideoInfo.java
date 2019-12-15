@@ -79,6 +79,23 @@ public class VideoInfo {
         Button muteButton = new Button("Mute");
         Button addToMyListButton = new Button();
 
+        addToMyListButton.setOnAction(actionEvent -> {
+            if(addToMyListButton.getText().equals("Add to My List")) {
+                model.addToMyList(video);
+            }
+            else{
+                model.removeFromMyList(video);
+            }
+        });
+
+        if(model.getMyList().contains(video)) {
+            addToMyListButton.setText("Remove from My List");
+        }
+        else{
+            addToMyListButton.setText("Add to My List");
+        }
+
+
         /*boolean alreadyAdded = false;
         for(Video v : new SearchEngine().getMyListVideos(model.getUserID())){
             if(video.getTitle().equals(v.getTitle())){

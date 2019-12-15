@@ -97,5 +97,17 @@ public class Model {
         return user3ButtonString;
     }
 
+    public void createMyList(){
+        myList = new ArrayList<>();
+    }
+    public List<Video> getMyList(){
+        return myList;
+    }
+    public void addToMyList(Video video){
+        myList.add(video);
+    }
+    public void removeFromMyList(Video video){
+        myList.remove(video);
+    }
 }
 

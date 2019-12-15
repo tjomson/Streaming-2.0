@@ -36,12 +36,4 @@ public class MyList {
         }
     }
 
-    public static void ListToFile(ArrayList<String> arrayList, String filename) throws IOException {
-        PrintWriter writer = new PrintWriter(filename);
-        for (String line : arrayList) {
-            writer.println(line);
-        }
-        writer.close();
-    }
-
 }

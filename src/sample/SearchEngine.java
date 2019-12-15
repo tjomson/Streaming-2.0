@@ -8,6 +8,7 @@ import java.util.List;
 
 public class SearchEngine {
     private List<Video> myListVideos;
+    Model model;
 
     public void addVideoToMyList(Video video){
         myListVideos.add(video);
@@ -26,6 +27,8 @@ public class SearchEngine {
     }
 
     public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries,boolean onMyList,int userID) throws IOException, noSuchVideoException {
+
+        model = Model.getInstance();
 
         List<Video> movies = new MovieReader().readMovies("film.txt");
         List<Video> series = new SeriesReader().readSeries("serier.txt");
@@ -64,7 +67,7 @@ public class SearchEngine {
 
         if(onMyList) {
             for(Video v : searchList){
-                for(Video myListv : myListVideos){
+                for(Video myListv : model.getMyList()){
                     if(v.getTitle().equals(myListv.getTitle())){
                         finalList.add(v);
                     }
