@@ -3,6 +3,8 @@ package sample;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
+import javafx.scene.image.Image;
+import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -102,8 +104,12 @@ public class ControllerChooseUser {
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("Create new user");
         dialog.setHeaderText("GOAT UP YOUR LIFE");
-        dialog.setContentText("Enter your name");
+        dialog.setContentText("Enter your name: ");
         dialog.setGraphic(null);
+
+        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+        stage.getIcons().add(new Image("blackSquare.png"));
+
         Optional<String> result = dialog.showAndWait();
 
         if (result.isPresent()) {

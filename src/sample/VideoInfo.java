@@ -174,6 +174,7 @@ public class VideoInfo {
         }
 
         currentStage = new Stage();
+        currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
         currentStage.setScene(new Scene(window, 700, 900));
         currentStage.setTitle(video.getTitle());
