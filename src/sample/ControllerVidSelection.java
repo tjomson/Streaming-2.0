@@ -26,7 +26,7 @@ public class ControllerVidSelection {
     Button changeUserButton = new Button("Change user");
     Stage mainStage;
 
-    public void openStartScene() throws IOException, noSuchVideoException, loggedInAsGuestException {
+    public void openStartScene() throws IOException, loggedInAsGuestException {
 
         try {
 
@@ -37,7 +37,7 @@ public class ControllerVidSelection {
             flowPane.setHgap(10);
             flowPane.setAlignment(Pos.CENTER);
 
-            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true, false, model.getUserID());
+            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true, false);
 
             for (Video video : videos) {
                 VBox vBox = video.getVideoVBox();
@@ -60,28 +60,28 @@ public class ControllerVidSelection {
             searchField.setOnKeyTyped(new EventHandler<KeyEvent>() {
                 @Override
                 public void handle(KeyEvent keyEvent) {
-                    hygge(flowPane);
+                    updateVideoSelection(flowPane);
                 }
             });
 
             movieCheckBox.setOnAction(actionEvent -> {
-                hygge(flowPane);
+                updateVideoSelection(flowPane);
             });
 
             seriesCheckBox.setOnAction(actionEvent -> {
-                hygge(flowPane);
+                updateVideoSelection(flowPane);
             });
             myListCheckBox.setOnAction(actionEvent -> {
-                hygge(flowPane);
+                updateVideoSelection(flowPane);
             });
 
 
             genreOptions.setOnAction(actionEvent -> {
-                hygge(flowPane);
+                updateVideoSelection(flowPane);
             });
 
             sortingOptions.setOnAction(actionEvent -> {
-                hygge(flowPane);
+                updateVideoSelection(flowPane);
             });
 
 
@@ -148,10 +148,10 @@ public class ControllerVidSelection {
         }
     }
 
-    public void hygge(FlowPane flowPane) {
+    public void updateVideoSelection(FlowPane flowPane) {
         try {
             flowPane.getChildren().clear();
-            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(), myListCheckBox.isSelected(), model.getUserID());
+            List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(), myListCheckBox.isSelected());
             for (Video video : searchedVideos) {
                 VBox vBox = video.getVideoVBox();
                 flowPane.getChildren().add(vBox);

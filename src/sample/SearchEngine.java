@@ -7,31 +7,14 @@ import java.util.Comparator;
 import java.util.List;
 
 public class SearchEngine {
-    private List<Video> myListVideos;
     Model model;
 
-    public void addVideoToMyList(Video video){
-        myListVideos.add(video);
-    }
-    public void removeVideoFromMyList(Video video){
-        myListVideos.remove(video);
-    }
-
-    public static void listToFile(ArrayList<Video> arrayList, String filename) throws IOException {
-        PrintWriter writer = new PrintWriter(filename);
-
-        for (Video video : arrayList) {
-            writer.println(video.getTitle());
-        }
-        writer.close();
-    }
-
-    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries,boolean onMyList,int userID) throws IOException, noSuchVideoException, loggedInAsGuestException {
+    public List<Video> getSearchItems(String searchText, String sortText, String genreText, boolean showMovies, boolean showSeries,boolean onMyList) throws IOException, noSuchVideoException, loggedInAsGuestException {
 
         model = Model.getInstance();
 
-        List<Video> movies = new MovieReader().readMovies("film.txt");
-        List<Video> series = new SeriesReader().readSeries("serier.txt");
+        List<Movie> movies = model.getMovies();
+        List<Series> series = model.getSeries();
         List<Video> videos = new ArrayList<>();
 
         if(showMovies) {
