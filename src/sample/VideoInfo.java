@@ -19,6 +19,7 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Map;
 
 public class VideoInfo {
@@ -76,10 +77,43 @@ public class VideoInfo {
 
         Button playButton = new Button("Play");
         Button muteButton = new Button("Mute");
-        Button addToMyList = new Button("Add to My List");
+        Button addToMyListButton = new Button();
 
-        //TILFØJ NOGET MED MYLIST-KNAPPEN HER
-        addToMyList.setOnAction(actionEvent -> {
+        boolean alreadyAdded = false;
+        for(Video v : new SearchEngine().getMyListVideos(model.getUserID())){
+            if(video.getTitle().equals(v.getTitle())){
+                alreadyAdded = true;
+            }
+        }
+
+        if(alreadyAdded){
+            addToMyListButton.setText("Remove from My List");
+        }
+        else{
+            addToMyListButton.setText("Add to My List");
+        }
+
+        //DET HER FUNGERER IKKE FULDT UD
+        addToMyListButton.setOnAction(actionEvent -> {
+            SearchEngine s = new SearchEngine();
+            if(addToMyListButton.getText().equals("Remove from My List")){
+                s.removeVideoFromMyList(video);
+                addToMyListButton.setText("Add to My List");
+                try {
+                    s.listToFile((ArrayList<Video>) s.getMyListVideos(model.getUserID()),"MyListUser" + model.getUserID());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
+            else{
+                s.addVideoToMyList(video);
+                addToMyListButton.setText("Remove from My List");
+                try {
+                    s.listToFile((ArrayList<Video>) s.getMyListVideos(model.getUserID()),"MyListUser" + model.getUserID());
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            }
 
         });
 
@@ -97,7 +131,7 @@ public class VideoInfo {
 
         HBox buttons = new HBox();
         buttons.setSpacing(10);
-        buttons.getChildren().addAll(playButton,muteButton,addToMyList);
+        buttons.getChildren().addAll(playButton,muteButton,addToMyListButton);
 
         playButton.setOnAction(actionEvent -> {
             if(playButton.getText().equals("Play")) {
