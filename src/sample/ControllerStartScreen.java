@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -40,7 +41,7 @@ public class ControllerStartScreen {
         model.addCurrentStage(stage);
 
         Parent root = FXMLLoader.load(getClass().getResource("GOAT.fxml"));
-        stage.setTitle("Goat");
+        stage.setTitle("GOAT");
         Scene scene = new Scene(root, 400,300);
         stage.setScene(scene);
         stage.show();

@@ -49,7 +49,6 @@ public class ControllerVidSelection {
             scrollPane.setFitToWidth(true);
 
             VBox window = new VBox();
-
             Label userNameLabel = new Label(" You are logged in as: " + model.getUserName());
 
             FlowPane topBar = new FlowPane();
