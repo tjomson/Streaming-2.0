@@ -78,35 +78,6 @@ public class VideoInfo {
 
         Button playButton = new Button("Play");
         Button muteButton = new Button("Mute");
-        Button addToMyListButton = new Button();
-
-
-        boolean isOnMyList = false;
-        for(Video v : model.getMyList()){
-            if(v.getTitle().equals(video.getTitle())){
-                isOnMyList = true;
-            }
-        }
-
-        if (isOnMyList) {
-            addToMyListButton.setText("Remove from My List");
-        } else {
-            addToMyListButton.setText("Add to My List");
-        }
-
-        addToMyListButton.setOnAction(actionEvent -> {
-            if(addToMyListButton.getText().equals("Add to My List")) {
-                model.addToMyList(video);
-                addToMyListButton.setText("Remove from My List");
-            }
-            else{
-                model.removeFromMyList(video);
-                addToMyListButton.setText("Add to My List");
-            }
-        });
-
-
-
 
         muteButton.setOnAction(actionEvent -> {
             if(muteButton.getText().equals("Mute")){
@@ -121,7 +92,35 @@ public class VideoInfo {
 
         HBox buttons = new HBox();
         buttons.setSpacing(10);
-        buttons.getChildren().addAll(playButton,muteButton,addToMyListButton);
+        buttons.getChildren().addAll(playButton,muteButton);
+
+        if(model.getUserID()!= 0) {
+            Button addToMyListButton = new Button();
+
+            boolean isOnMyList = false;
+            for (Video v : model.getMyList()) {
+                if (v.getTitle().equals(video.getTitle())) {
+                    isOnMyList = true;
+                }
+            }
+
+            if (isOnMyList) {
+                addToMyListButton.setText("Remove from My List");
+            } else {
+                addToMyListButton.setText("Add to My List");
+            }
+
+            addToMyListButton.setOnAction(actionEvent -> {
+                if (addToMyListButton.getText().equals("Add to My List")) {
+                    model.addToMyList(video);
+                    addToMyListButton.setText("Remove from My List");
+                } else {
+                    model.removeFromMyList(video);
+                    addToMyListButton.setText("Add to My List");
+                }
+            });
+            buttons.getChildren().add(addToMyListButton);
+        }
 
         playButton.setOnAction(actionEvent -> {
             if(playButton.getText().equals("Play")) {
