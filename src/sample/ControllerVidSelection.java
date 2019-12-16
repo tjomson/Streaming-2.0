@@ -87,13 +87,9 @@ public class ControllerVidSelection {
 
 
             changeUserButton.setOnAction(actionEvent -> {
-                ControllerStartScreen c = new ControllerStartScreen();
-                try {
-                    c.goToChooseUser();
-                    model.getMainStage().close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+                ChooseUserScreen c = new ChooseUserScreen();
+                c.chooseUser();
+                model.getMainStage().close();
             });
 
             sortingOptions.getItems().addAll("Title: A-Z", "Title: Z-A", "Year: new-old", "Year: old-new", "Rating: best-worst", "Rating: worst-best");

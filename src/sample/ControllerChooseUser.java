@@ -1,6 +1,7 @@
 package sample;
 
 import javafx.fxml.FXML;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
@@ -9,11 +10,14 @@ import javafx.stage.Stage;
 import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 
 public class ControllerChooseUser {
+
+
 
     @FXML
     Button user1Button;
@@ -25,6 +29,7 @@ public class ControllerChooseUser {
     String user1Name = "New User1";
 
     Model model;
+
 
     public void userClick1() throws IOException, noSuchVideoException, loggedInAsGuestException {
 
@@ -68,6 +73,7 @@ public class ControllerChooseUser {
             openChangeUserWindow();
         }
     }
+
 
     public void openStartSceneMethod() throws IOException, noSuchVideoException, loggedInAsGuestException {
         ControllerVidSelection c = new ControllerVidSelection();
