@@ -14,10 +14,10 @@ import java.io.IOException;
 
 public class Video implements Playable {
 
-    protected String title;
-    protected int year;
-    protected String[] genres;
-    protected double rating;
+    private String title;
+    private int year;
+    private String[] genres;
+    private double rating;
 
     public Video(String title, int year, String[] genres, double rating){
         this.title = title;
@@ -60,10 +60,10 @@ public class Video implements Playable {
         } else {
             yearLabel = new Label("" + this.getYear());
         }
+        vBox.getChildren().add(yearLabel);
 
         FlowPane genreField = new FlowPane();
 
-        vBox.getChildren().add(yearLabel);
         for (String genre : this.getGenres()) {
             genreField.getChildren().add(new Label(genre + " "));
         }

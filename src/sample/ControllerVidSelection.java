@@ -126,7 +126,6 @@ public class ControllerVidSelection {
                     new Label(" Genres:"),
                     genreOptions,
 
-
                     new Label(" Show movies"),
                     movieCheckBox,
                     new Label(" Show series"),

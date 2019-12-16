@@ -73,6 +73,7 @@ public class ChooseUserScreen {
         userButtons[1].setOnAction(actionEvent -> {
             try {
                 userClick(1);
+
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (noSuchVideoException e) {
@@ -124,6 +125,7 @@ public class ChooseUserScreen {
 
 
         if (!userButtons[userNumber].getText().equals("New User")) {
+            model.addUserName(userButtons[userNumber].getText());
             openStartSceneMethod();
             model.getCurrentStage().close();
         } else {
