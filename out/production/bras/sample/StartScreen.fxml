@@ -17,7 +17,7 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.image.Image?>
 
-<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerStartScreen" id="gridPane" spacing="10">
+<VBox prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.ControllerStartScreen" id="gridPane" spacing="10" style="-fx-background-color: red" alignment="CENTER">
 
     <ImageView fx:id="im" fitHeight="100" fitWidth="300" >
         <image>
@@ -25,7 +25,7 @@
         </image>
     </ImageView>
 
-    <Button fx:id="guestButton" text="Continue as guest" onAction="#goToVidSelection" alignment="CENTER"/>
-    <Button fx:id="goToChooseUserButton" text="Sign in as user" onAction="#goToChooseUser"/>
+    <Button fx:id="guestButton" text="Continue as guest" onAction="#goToVidSelection" prefWidth="120"/>
+    <Button fx:id="goToChooseUserButton" text="Sign in as user" onAction="#goToChooseUser" prefWidth="120"/>
 
 </VBox>

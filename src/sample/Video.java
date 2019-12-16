@@ -12,7 +12,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-public class Video {
+public class Video implements Playable {
+
     protected String title;
     protected int year;
     protected String[] genres;
@@ -25,8 +26,8 @@ public class Video {
         this.rating = rating;
 
     }
-
-    public VBox getVideoVBox() throws FileNotFoundException {
+    @Override
+    public VBox toVBox() throws FileNotFoundException {
 
         FileInputStream f;
         if (this instanceof Movie) {

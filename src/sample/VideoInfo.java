@@ -118,6 +118,7 @@ public class VideoInfo {
                     model.removeFromMyList(video);
                     addToMyListButton.setText("Add to My List");
                 }
+
             });
             buttons.getChildren().add(addToMyListButton);
         }
@@ -131,6 +132,8 @@ public class VideoInfo {
                 mediaPlayer.pause();
                 playButton.setText("Play");
             }
+
+
         });
 
         mediaPlayer.setOnEndOfMedia(() -> {

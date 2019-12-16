@@ -27,6 +27,7 @@ public class ControllerVidSelection {
     Button changeUserButton = new Button("Change user");
     Stage mainStage;
 
+
     public void openStartScene() throws IOException, loggedInAsGuestException {
 
         try {
@@ -41,7 +42,7 @@ public class ControllerVidSelection {
             List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true, false);
 
             for (Video video : videos) {
-                VBox vBox = video.getVideoVBox();
+                VBox vBox = video.toVBox();
                 flowPane.getChildren().add(vBox);
             }
 
@@ -155,7 +156,7 @@ public class ControllerVidSelection {
             flowPane.getChildren().clear();
             List<Video> searchedVideos = new SearchEngine().getSearchItems(searchField.getText(), sortingOptions.getValue(), genreOptions.getValue(), movieCheckBox.isSelected(), seriesCheckBox.isSelected(), myListCheckBox.isSelected());
             for (Video video : searchedVideos) {
-                VBox vBox = video.getVideoVBox();
+                VBox vBox = video.toVBox();
                 flowPane.getChildren().add(vBox);
             }
 
@@ -167,4 +168,5 @@ public class ControllerVidSelection {
         }
 
     }
+
 }
