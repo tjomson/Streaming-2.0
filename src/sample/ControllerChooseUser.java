@@ -75,7 +75,7 @@ public class ControllerChooseUser {
     }
 
     public void writeNewUser1() {
-        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user1.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user1"))) {
             bw.write(user1Button.getText());
         } catch (IOException e) {
             e.printStackTrace();
@@ -83,7 +83,7 @@ public class ControllerChooseUser {
     }
 
     public void writeNewUser2(){
-        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user2.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user2"))) {
             bw.write(user2Button.getText());
         } catch (IOException e) {
             e.printStackTrace();
@@ -91,7 +91,7 @@ public class ControllerChooseUser {
     }
 
     public void writeNewUser3(){
-        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user3.txt"))) {
+        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user3"))) {
             bw.write(user3Button.getText());
         } catch (IOException e) {
             e.printStackTrace();
