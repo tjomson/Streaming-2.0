@@ -1,10 +1,14 @@
 package sample;
 
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
@@ -41,7 +45,25 @@ public class ChooseUserScreen {
         user3Button = new Button("New User");
         userButtons = new Button[]{new Button(),user1Button, user2Button, user3Button};
 
-        window.getChildren().addAll(userButtons[1],userButtons[2],userButtons[3]);
+        user1Button.setPrefWidth(100);
+        user2Button.setPrefWidth(100);
+        user3Button.setPrefWidth(100);
+
+        window.setAlignment(Pos.CENTER);
+        BackgroundFill background_fill = new BackgroundFill(Color.RED,
+                CornerRadii.EMPTY, Insets.EMPTY);
+        window.setBackground(new Background(background_fill));
+
+        window.setSpacing(10);
+
+        Label goatLabel = new Label("GOAT");
+
+
+        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
+        goatLabel.setBorder(border);
+        Label chooseUserLabel = new Label("Choose user:");
+
+        window.getChildren().addAll(goatLabel,chooseUserLabel,userButtons[1],userButtons[2],userButtons[3]);
 
         userButtons[1].setOnAction(actionEvent -> {
             try {
@@ -81,7 +103,7 @@ public class ChooseUserScreen {
         currentStage = new Stage();
         currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
-        currentStage.setScene(new Scene(window, 700, 900));
+        currentStage.setScene(new Scene(window, 400, 400));
         currentStage.setTitle("lmao");
         currentStage.show();
 

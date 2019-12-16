@@ -2,13 +2,22 @@ package sample;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
+import java.awt.*;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 public class StartScreen extends Application {
@@ -20,6 +29,20 @@ public class StartScreen extends Application {
 
 
         VBox window = new VBox();
+        FileInputStream f = new FileInputStream("GoatLogo.png");
+        Image i = new Image(f);
+        ImageView iv = new ImageView(i);
+        iv.setFitHeight(100);
+        iv.setFitWidth(300);
+        window.getChildren().add(iv);
+
+        window.setAlignment(Pos.CENTER);
+        BackgroundFill background_fill = new BackgroundFill(Color.RED,
+                CornerRadii.EMPTY, Insets.EMPTY);
+        window.setBackground(new Background(background_fill));
+
+        window.setSpacing(10);
+
         Button continueAsGuestButton = new Button("Continue as guest");
         Button signInAsUserButton = new Button("Sign in as user");
         window.getChildren().addAll(continueAsGuestButton,signInAsUserButton);
