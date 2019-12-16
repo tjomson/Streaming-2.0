@@ -17,12 +17,12 @@ import java.io.PrintWriter;
 import java.util.Optional;
 
 public class ChooseUserScreen {
-    Model model;
-    Stage currentStage;
-    Button user1Button;
-    Button user2Button;
-    Button user3Button;
-    Button[] userButtons;
+    private Model model;
+    private Stage currentStage;
+    private Button user1Button;
+    private Button user2Button;
+    private Button user3Button;
+    private Button[] userButtons;
 
     public void chooseUser() throws IOException {
         model = Model.getInstance();
@@ -76,8 +76,6 @@ public class ChooseUserScreen {
 
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (noSuchVideoException e) {
-                e.printStackTrace();
             } catch (loggedInAsGuestException e) {
                 e.printStackTrace();
             }
@@ -88,8 +86,6 @@ public class ChooseUserScreen {
                 userClick(2);
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (noSuchVideoException e) {
-                e.printStackTrace();
             } catch (loggedInAsGuestException e) {
                 e.printStackTrace();
             }
@@ -98,8 +94,6 @@ public class ChooseUserScreen {
             try {
                 userClick(3);
             } catch (IOException e) {
-                e.printStackTrace();
-            } catch (noSuchVideoException e) {
                 e.printStackTrace();
             } catch (loggedInAsGuestException e) {
                 e.printStackTrace();
@@ -117,7 +111,7 @@ public class ChooseUserScreen {
 
 
 
-    public void userClick(int userNumber) throws IOException, noSuchVideoException, loggedInAsGuestException {
+    public void userClick(int userNumber) throws IOException, loggedInAsGuestException {
 
         model = Model.getInstance();
         model.addUserID(userNumber);
@@ -132,7 +126,7 @@ public class ChooseUserScreen {
             openChangeUserWindow();
         }
     }
-    public void openStartSceneMethod() throws IOException, noSuchVideoException, loggedInAsGuestException {
+    public void openStartSceneMethod() throws IOException, loggedInAsGuestException {
         new ControllerVidSelection().openStartScene();
     }
     public void openChangeUserWindow() throws IOException {

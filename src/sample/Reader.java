@@ -9,12 +9,9 @@ public class Reader {
 
         File file = new File(txtLocation);
 
-        BufferedReader br = new BufferedReader(
-                new InputStreamReader(
-                        new FileInputStream(file), "ISO-8859-1")); //ISO-8859-1 gør at man kan læse specielle tegn, f.eks. ä
+        BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(file), "ISO-8859-1")); //ISO-8859-1 gør at man kan læse specielle tegn, f.eks. ä
 
-        List<String> videoStrings;
-        videoStrings = new ArrayList<>();
+        List<String> videoStrings = new ArrayList<>();
 
         String videoInfo;
 

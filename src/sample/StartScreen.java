@@ -1,10 +1,8 @@
 package sample;
 
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.image.Image;
@@ -16,17 +14,14 @@ import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
-import java.awt.*;
 import java.io.FileInputStream;
 import java.io.IOException;
 
 public class StartScreen extends Application {
-    Model model;
-
+    private Model model;
 
     @Override
     public void start(Stage stage) throws Exception {
-
 
         VBox window = new VBox();
         FileInputStream f = new FileInputStream("GoatLogo.png");

@@ -14,7 +14,7 @@ public class SeriesReader extends VideoReader {
         List<String[]> series = super.readFiles(txtLocation);
 
         for(String[] s : series) {
-            int year = 0;
+            int year;
             int endYear = 0;
             String[] years = s[1].split("-");
             year = Integer.parseInt(years[0].replace(" ",""));

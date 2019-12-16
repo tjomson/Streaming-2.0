@@ -2,7 +2,6 @@ package sample;
 
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
@@ -19,14 +18,12 @@ import javafx.util.Duration;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
 public class VideoInfo {
 
-    Model model;
-    Stage currentStage;
+    private Model model;
+    private Stage currentStage;
 
     public void openVideoInfoScene(Video video) throws IOException{
         model = Model.getInstance();
@@ -176,9 +173,12 @@ public class VideoInfo {
             window.getChildren().addAll(mediaView,buttons,imageInfoBox);
         }
 
+        window.setOnMouseDragExited(mouseDragEvent -> mediaPlayer.stop());
+
         currentStage = new Stage();
         currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
+        currentStage.setOnCloseRequest(windowEvent -> mediaPlayer.stop());
         currentStage.setScene(new Scene(window, 700, 900));
         currentStage.setTitle(video.getTitle());
         currentStage.show();

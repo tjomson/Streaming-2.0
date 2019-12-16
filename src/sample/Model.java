@@ -9,23 +9,15 @@ import java.util.List;
 
 public class Model {
 
-    User user;
-    List<User> users;
-    List<Movie> movies;
-    List<Series> series;
-    List<Video> myList;
+    private List<Video> myList;
     private static Model model;
-    int chosenUser;
-    String userName;
+    private int chosenUser;
+    private String userName;
 
-    Stage currentStage;
-    Stage mainStage;
-    String user1ButtonString = "New User";
-    String user2ButtonString = "New User";
-    String user3ButtonString = "New User";
+    private Stage currentStage;
+    private Stage mainStage;
 
     private Model() {
-        users = new ArrayList<>();
     }
 
     public static Model getInstance() {
@@ -77,25 +69,6 @@ public class Model {
         return mainStage;
     }
 
-
-    public void setButton1(String name) {
-        user1ButtonString = name;
-    }
-    public void setButton2(String name) {
-        user2ButtonString = name;
-    }
-    public void setButton3(String name) {
-        user3ButtonString = name;
-    }
-    public String getUser1Button() {
-        return user1ButtonString;
-    }
-    public String getUser2Button() {
-        return user2ButtonString;
-    }
-    public String getUser3Button() {
-        return user3ButtonString;
-    }
 
     public void createMyList(){
         myList = new ArrayList<>();
