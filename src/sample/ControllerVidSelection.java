@@ -88,7 +88,11 @@ public class ControllerVidSelection {
 
             changeUserButton.setOnAction(actionEvent -> {
                 ChooseUserScreen c = new ChooseUserScreen();
-                c.chooseUser();
+                try {
+                    c.chooseUser();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
                 model.getMainStage().close();
             });
 

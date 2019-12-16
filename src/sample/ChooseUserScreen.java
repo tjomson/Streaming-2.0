@@ -24,7 +24,7 @@ public class ChooseUserScreen {
     Button user3Button;
     Button[] userButtons;
 
-    public void chooseUser(){
+    public void chooseUser() throws IOException {
         model = Model.getInstance();
         model.getCurrentStage().close();
         Stage stage = new Stage();
@@ -37,13 +37,18 @@ public class ChooseUserScreen {
         c.openChooseUserScreen();
     }
 
-    public void openChooseUserScreen(){
+    public void openChooseUserScreen() throws IOException {
         model = Model.getInstance();
         VBox window = new VBox();
-        user1Button = new Button("New User");
-        user2Button = new Button("New User");
-        user3Button = new Button("New User");
-        userButtons = new Button[]{new Button(),user1Button, user2Button, user3Button};
+        user1Button = new Button();
+        user2Button = new Button();
+        user3Button = new Button();
+        userButtons = new Button[]{new Button(),user1Button, user2Button, user3Button}; //new Button() tilføjes for at fylde index 0 ud.
+
+        for(int i = 1; i<=3; i++) {
+                userButtons[i].setText(new Reader().findFile("user" + i).get(0));
+        }
+
 
         user1Button.setPrefWidth(100);
         user2Button.setPrefWidth(100);
@@ -107,9 +112,10 @@ public class ChooseUserScreen {
         currentStage.setTitle("lmao");
         currentStage.show();
 
-
-
     }
+
+
+
     public void userClick(int userNumber) throws IOException, noSuchVideoException, loggedInAsGuestException {
 
         model = Model.getInstance();
@@ -125,8 +131,7 @@ public class ChooseUserScreen {
         }
     }
     public void openStartSceneMethod() throws IOException, noSuchVideoException, loggedInAsGuestException {
-        ControllerVidSelection c = new ControllerVidSelection();
-        c.openStartScene();
+        new ControllerVidSelection().openStartScene();
     }
     public void openChangeUserWindow() throws IOException {
 
@@ -162,7 +167,7 @@ public class ChooseUserScreen {
     }
 
     public void writeNewUser(int userNumber){
-        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user3"))) {
+        try (BufferedWriter bw = new BufferedWriter(new PrintWriter("user" + userNumber))) {
             bw.write(userButtons[userNumber].getText());
         } catch (IOException e) {
             e.printStackTrace();
