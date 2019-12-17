@@ -3,7 +3,6 @@ package sample;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -78,7 +77,7 @@ public class VideoSelection {
                 model.getMainStage().close();
             });
 
-            sortingOptions.getItems().addAll("Titel: A-Å", "Titel: Å-A", "Årstal: Ny-Gammel", "Årstal: gammel-ny", "Vurdering: bedst-dårligst", "Vurdering: dårligst-bedst");
+            sortingOptions.getItems().addAll("Titel: A-Å", "Titel: Å-A", "Årstal: Ny-Gammel", "Årstal: Gammel-Ny", "Vurdering: Bedst-Dårligst", "Vurdering: Dårligst-Bedst");
             sortingOptions.getSelectionModel().select(0);
 
             List<String> genres = new ArrayList<>();

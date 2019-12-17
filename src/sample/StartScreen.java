@@ -47,7 +47,7 @@ public class StartScreen extends Application {
                 goToVidSelection();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (loggedInAsGuestException e) {
+            } catch (sample.loggedInAsGuestException e) {
                 e.printStackTrace();
             }
         });
@@ -62,7 +62,7 @@ public class StartScreen extends Application {
 
         model = Model.getInstance();
 
-       // stage.getIcons().add(new Image("/blackSquare.png"));
+       stage.getIcons().add(new Image("/blackSquare.png"));
 
         model.addCurrentStage(stage);
 

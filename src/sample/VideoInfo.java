@@ -177,7 +177,7 @@ public class VideoInfo {
         window.setOnMouseDragExited(mouseDragEvent -> mediaPlayer.stop());
 
         currentStage = new Stage();
-      //  currentStage.getIcons().add(new Image("/blackSquare.png"));
+        currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
         currentStage.setOnCloseRequest(windowEvent -> mediaPlayer.stop());
         currentStage.setScene(new Scene(window, 700, 900));

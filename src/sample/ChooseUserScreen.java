@@ -29,7 +29,7 @@ public class ChooseUserScreen {
         model.getCurrentStage().close();
         Stage stage = new Stage();
 
-       // stage.getIcons().add(new Image("/blackSquare.png"));
+       stage.getIcons().add(new Image("/blackSquare.png"));
 
         model.addCurrentStage(stage);
 
@@ -101,7 +101,7 @@ public class ChooseUserScreen {
         });
 
         currentStage = new Stage();
-        //currentStage.getIcons().add(new Image("/blackSquare.png"));
+        currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
         currentStage.setScene(new Scene(window, 400, 400));
         currentStage.setTitle("GOAT");
@@ -117,7 +117,6 @@ public class ChooseUserScreen {
         model.addUserID(userNumber);
         model.createMyList();
 
-
         if (!userButtons[userNumber].getText().equals("Ny Bruger")) {
             model.addUserName(userButtons[userNumber].getText());
             openStartSceneMethod();
@@ -126,6 +125,7 @@ public class ChooseUserScreen {
             openChangeUserWindow();
         }
     }
+
     public void openStartSceneMethod() throws IOException, loggedInAsGuestException {
         new VideoSelection().openStartScene();
     }

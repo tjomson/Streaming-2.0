@@ -67,13 +67,13 @@ public class SearchEngine {
         if (sortText.equals("Årstal: Ny-Gammel")) {
             searchList.sort(Comparator.comparing(Video::getYear).reversed());
         }
-        if (sortText.equals("Årstal: Ny-Gammel")) {
+        if (sortText.equals("Årstal: Gammel-Ny")) {
             searchList.sort(Comparator.comparing(Video::getYear));
         }
         if (sortText.equals("Vurdering: Bedst-Dårligst")) {
             searchList.sort(Comparator.comparing(Video::getRating).reversed());
         }
-        if (sortText.equals("Vurdering: Bedst-Dårligst")) {
+        if (sortText.equals("Vurdering: Dårligst-Bedst")) {
             searchList.sort(Comparator.comparing(Video::getRating));
         }
 
