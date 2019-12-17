@@ -49,7 +49,12 @@ public class StartScreen extends Application {
 
         continueAsGuestButton.setOnAction(actionEvent -> {
             try {
-                goToVidSelection();
+                model = Model.getInstance();
+                model.addUserName("gæst");
+                model.addUserID(0);
+                model.getCurrentStage().close();
+
+                new VideoSelection().openStartScene();
             } catch (IOException e) {
                 e.printStackTrace();
             } catch (sample.loggedInAsGuestException e) {
@@ -59,7 +64,7 @@ public class StartScreen extends Application {
 
         signInAsUserButton.setOnAction(actionEvent -> {
             try {
-                goToChooseUser();
+                new ChooseUserScreen().chooseUser();
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -67,7 +72,7 @@ public class StartScreen extends Application {
 
         model = Model.getInstance();
 
-       stage.getIcons().add(new Image("/blackSquare.png"));
+        stage.getIcons().add(new Image("/blackSquare.png"));
 
         model.addCurrentStage(stage);
 
@@ -80,17 +85,6 @@ public class StartScreen extends Application {
     public static void main(String[] args) {
         launch(args);
     }
-    public void goToVidSelection() throws IOException, loggedInAsGuestException {
-        model = Model.getInstance();
-        model.addUserName("gæst");
-        model.addUserID(0);
-        model.getCurrentStage().close();
 
-        new VideoSelection().openStartScene();
-    }
 
-    public void goToChooseUser() throws IOException {
-        new ChooseUserScreen().chooseUser();
-
-    }
 }
