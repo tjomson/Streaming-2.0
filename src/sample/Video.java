@@ -10,6 +10,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
+//Denne klasse er superklasse for Movie og Series.
+
 public class Video implements Playable {
 
     private String title;
@@ -24,9 +26,11 @@ public class Video implements Playable {
         this.rating = rating;
 
     }
+    //En videos informationer bruges til at lave en VBox som kan vises.
     @Override
     public VBox toVBox() throws FileNotFoundException {
 
+        //Videoens billede findes.
         FileInputStream f;
         if (this instanceof Movie) {
             f = new FileInputStream("Billeder/" + this.getTitle() + ".jpg");
@@ -37,15 +41,13 @@ public class Video implements Playable {
 
         VBox vBox = new VBox();
         vBox.setPrefWidth(140);
-        Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
-        vBox.setBorder(border);
+        vBox.setBorder(new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
 
-        vBox.getChildren().add(new ImageView(image));
         Label titleLabel = new Label(this.getTitle());
         titleLabel.setWrapText(true);
-        vBox.getChildren().add(titleLabel);
         Label yearLabel;
 
+        //Hvis det er en serie skal slutåret også vises.
         if (this instanceof Series) {
             Series series1 = (Series) this;
             String endYearString;
@@ -58,17 +60,18 @@ public class Video implements Playable {
         } else {
             yearLabel = new Label("" + this.getYear());
         }
-        vBox.getChildren().add(yearLabel);
 
+        //Alle videoens genrer indsættes.
         FlowPane genreField = new FlowPane();
-
         for (String genre : this.getGenres()) {
             genreField.getChildren().add(new Label(genre + " "));
         }
 
+        //Alle informationerne tilføjes.
         Label ratingLabel = new Label("" + this.getRating());
-        vBox.getChildren().addAll(genreField,ratingLabel);
+        vBox.getChildren().addAll(new ImageView(image),titleLabel,yearLabel,genreField,ratingLabel);
 
+        //Når den klikkes, skal et nyt vindue åbne med den video.
         vBox.setOnMouseClicked(actionEvent ->{
             try {
                 new VideoInfo().openVideoInfoScene(this);
@@ -83,11 +86,9 @@ public class Video implements Playable {
     public int getYear(){
         return year;
     }
-
     public String getTitle(){
         return title;
     }
-
     public double getRating(){
         return rating;
     }

@@ -20,6 +20,7 @@ import java.io.IOException;
 public class StartScreen extends Application {
     private Model model;
 
+    //Denne klasse er det første man ser når man kører programmet, og det er derfor main-metoden er her.
     @Override
     public void start(Stage stage) throws Exception {
 
@@ -38,6 +39,7 @@ public class StartScreen extends Application {
 
         window.setSpacing(10);
 
+        //De to knapper tilføjes og deres funktioner defineres.
         Button continueAsGuestButton = new Button("Fortsæt som gæst");
         Button signInAsUserButton = new Button("Log ind som bruger");
         window.getChildren().addAll(continueAsGuestButton,signInAsUserButton);

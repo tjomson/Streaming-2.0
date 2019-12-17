@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 
+//Denne klasse bruges til at finde de videoer der skal vises ud fra de givne kriterier.
 public class SearchEngine {
     Model model;
 
@@ -16,12 +17,15 @@ public class SearchEngine {
         List<Series> series = model.getSeries();
         List<Video> videos = new ArrayList<>();
 
+        //Hvis film er checked, skal de vises, så de tilføjes til arraylisten.
         if(showMovies) {
             videos.addAll(movies);
         }
+        //Hvis serier skal vises.
         if(showSeries) {
             videos.addAll(series);
         }
+        //En ny arrayliste laves, hvor videoen tilføjes hvis den har den givne genre, eller hvis genren er "Alle".
         List<Video> genreList = new ArrayList<>();
         for (Video video : videos){
             for(String string : video.getGenres()){
@@ -31,6 +35,7 @@ public class SearchEngine {
             }
         }
 
+        //Hver video tjekkes om den indeholder det givne søgeord.
         List<Video> searchList = new ArrayList<>();
         for(Video video : videos){
             if(video.getTitle().toLowerCase().contains(searchText.toLowerCase())){
@@ -38,11 +43,12 @@ public class SearchEngine {
             }
         }
 
-
+        //Der beholdes de elementer som både har den rette genre og det rette søgeord.
         searchList.retainAll(genreList);
 
         List<Video> finalList = new ArrayList<>();
 
+        //Der tjekkes hvilke film som er på My List.
         if(onMyList) {
             if (model.getUserID()==0) {
                 throw new loggedInAsGuestException("Denne funktion er ikke tilgengælig når du er logget ind som gæst. Du kan logge ind som bruger, ved at klikke på 'Skift bruger' oppe i højre hjørne.");
@@ -54,10 +60,11 @@ public class SearchEngine {
                     }
                 }
             }
+            //Der beholdes de videoer som opfylder kriterierne.
             searchList.retainAll(finalList);
         }
 
-
+        //Der tjekkes hvordan der skal sorteres, og listen ordnes ud fra det.
         if (sortText.equals("Titel: A-Å")) {
             searchList.sort(Comparator.comparing(Video::getTitle));
         }

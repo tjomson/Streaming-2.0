@@ -2,6 +2,7 @@ package sample;
 
 import java.util.Map;
 
+//Denne klasse bruges til at oprette Series-objekter.
 public class Series extends Video{
 
     private Map seasons;

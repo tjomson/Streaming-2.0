@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Denne klasse benyttes til at holde oplysninger som flere andre klasser skal kunne tilgå.
 public class Model {
 
     private List<Video> myList;
@@ -17,6 +18,7 @@ public class Model {
     private Stage currentStage;
     private Stage mainStage;
 
+    //Singleton, der kan kun være en model.
     private Model() {
     }
 
@@ -79,6 +81,8 @@ public class Model {
     public void addToMyList(Video video){
         myList.add(video);
     }
+
+    //Fjerner fra liste ved at sammenligne titler, da det ikke virkede at sammenligne objekter.
     public void removeFromMyList(Video video){
 
         List<Video> temporaryList = new ArrayList<>();
