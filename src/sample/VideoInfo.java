@@ -20,8 +20,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Map;
 
-public class VideoInfo {
+//Denne klasse udgør hvad der vises når man klikker på en video.
 
+public class VideoInfo {
 
     private Model model;
     private Stage currentStage;
@@ -36,7 +37,9 @@ public class VideoInfo {
         infoBox.setSpacing(20);
         window.setSpacing(20);
 
+        //Videoens billede findes.
         FileInputStream f;
+        //Der tjekkes om det er en film eller en serie, da billederne ligger i forskellige mapper.
         if (video instanceof Movie) {
             f = new FileInputStream("Billeder/" + video.getTitle() + ".jpg");
         } else {
@@ -45,6 +48,7 @@ public class VideoInfo {
         Image image = new Image(f);
         ImageView imageView = new ImageView(image);
 
+        //En label med årstal laves. Hvis det er en serie, skal slut-årstallet også vises.
         Label yearLabel;
         if (video instanceof Series) {
             Series series1 = (Series) video;
@@ -59,6 +63,7 @@ public class VideoInfo {
             yearLabel = new Label("Årstal: " + video.getYear());
         }
 
+        //Videoens genrer tilføjes til en HBox så de står vandret efter hinanden.
         HBox genreField = new HBox();
         genreField.getChildren().add(new Label("Genre: "));
         for (String genre : video.getGenres()) {
@@ -69,22 +74,24 @@ public class VideoInfo {
 
         imageInfoBox.getChildren().addAll(imageView,infoBox);
 
+        //Eksempel-videoen indlæses.
         File videoSource = new File("video example.mp4");
         Media media = new Media(videoSource.toURI().toString());
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
 
+        //Knappen til at mute tilføjes.
         Button playButton = new Button("Afspil");
-        Button muteButton = new Button("Mute");
+        Button muteButton = new Button("Slå lyd fra");
 
         muteButton.setOnAction(actionEvent -> {
-            if(muteButton.getText().equals("Mute")){
+            if(muteButton.getText().equals("Slå lyd fra")){
                 mediaPlayer.setMute(true);
-                muteButton.setText("Unmute");
+                muteButton.setText("Slå lyd til");
             }
             else{
                 mediaPlayer.setMute(false);
-                muteButton.setText("Mute");
+                muteButton.setText("Slå lyd fra");
             }
         });
 
@@ -92,16 +99,18 @@ public class VideoInfo {
         buttons.setSpacing(10);
         buttons.getChildren().addAll(playButton,muteButton);
 
+        //Hvis man er logget ind, har man et ID som ikke er 0.
         if(model.getUserID()!= 0) {
             Button addToMyListButton = new Button();
 
             boolean isOnMyList = false;
             for (Video v : model.getMyList()) {
-                if (v.getTitle().equals(video.getTitle())) {
+                if (v.getTitle().equals(video.getTitle())) { //Der benyttes titel-sammenligning, da det ikke virkede at sammenligne objekter direkte.
                     isOnMyList = true;
                 }
             }
 
+            //Knap til at fjerne/tilføje til ens liste.
             if (isOnMyList) {
                 addToMyListButton.setText("Fjern fra Min Liste");
             } else {
@@ -131,18 +140,20 @@ public class VideoInfo {
                 playButton.setText("Afspil");
             }
 
-
         });
 
+        //Når filmen er færdig starter den forfra og pauser.
         mediaPlayer.setOnEndOfMedia(() -> {
             playButton.setText("Afspil");
             mediaPlayer.seek(Duration.millis(0));
             mediaPlayer.pause();
         });
 
+        //Hvis videoen er en serie, vises alle sæsoner og afsnit.
         if(video instanceof Series){
             Label nowPlayingLabel = new Label("Episode valgt: Sæson 1 episode 1");
 
+            //Dette arangeres i en VBox hvor afsnittene i hver sæson tilføjes til et FlowPane.
             Series series = (Series) video;
             ScrollPane scrollPane = new ScrollPane();
             VBox seasonsBox = new VBox();
@@ -150,6 +161,7 @@ public class VideoInfo {
             scrollPane.setFitToWidth(true);
             infoBox.getChildren().add(new Label("Antal sæsoner: " + series.getSeasons().size()));
 
+            //For hver sæson tilføjes afsnittene.
             for(Map.Entry entry : series.getSeasons().entrySet()){
 
                 FlowPane episodesFlowPane = new FlowPane();
@@ -158,11 +170,15 @@ public class VideoInfo {
                     Button button = new Button("Episode " + i);
                     final int finalInt = i; //En label kan kun tage en final int.
                     button.setOnAction(actionEvent -> {
+                                //Når man klikker på et afsnit, starter eksempel-videoen forfra, og der skrives hvilket afsnit som afspiller.
                                 nowPlayingLabel.setText("Episode valgt: Sæson " + entry.getKey() + " episode " + finalInt);
                                 mediaPlayer.seek(Duration.millis(0));
+                                mediaPlayer.pause();
+                                playButton.setText("Afspil");
+
                             }
                     );
-
+                    //Knappen for det afsnit tilføjes.
                     episodesFlowPane.getChildren().add(button);
                 }
                 seasonsBox.getChildren().addAll(new Label("Sæson " + entry.getKey()),episodesFlowPane);
@@ -170,16 +186,15 @@ public class VideoInfo {
             window.getChildren().addAll(mediaView,nowPlayingLabel,buttons,imageInfoBox,scrollPane);
 
         }
+        //Hvis det ikke er en serie, og dermed er en film, tilføjes de relevante ting.
         else{
             window.getChildren().addAll(mediaView,buttons,imageInfoBox);
         }
 
-        window.setOnMouseDragExited(mouseDragEvent -> mediaPlayer.stop());
-
         currentStage = new Stage();
         currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
-        currentStage.setOnCloseRequest(windowEvent -> mediaPlayer.stop());
+        currentStage.setOnCloseRequest(windowEvent -> mediaPlayer.stop()); //Videoafspilning stopper når vinduet lukkes.
         currentStage.setScene(new Scene(window, 700, 900));
         currentStage.setTitle(video.getTitle());
         currentStage.show();

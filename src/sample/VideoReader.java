@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+//Denne klasse opdeler en string ved hvert semikolon, og returnerer en arrayliste af String-arrays.
+
 public class VideoReader extends Reader {
 
     public List readFiles(String txtLocation) throws IOException {
