@@ -47,8 +47,6 @@ public class StartScreen extends Application {
                 goToVidSelection();
             } catch (IOException e) {
                 e.printStackTrace();
-            } catch (noSuchVideoException e) {
-                e.printStackTrace();
             } catch (loggedInAsGuestException e) {
                 e.printStackTrace();
             }
@@ -68,31 +66,26 @@ public class StartScreen extends Application {
 
         model.addCurrentStage(stage);
 
-
         stage.setTitle("GOAT");
         Scene scene = new Scene(window, 400,300);
         stage.setScene(scene);
         stage.show();
-
-
     }
 
     public static void main(String[] args) {
         launch(args);
     }
-    public void goToVidSelection() throws IOException, noSuchVideoException, loggedInAsGuestException {
+    public void goToVidSelection() throws IOException, loggedInAsGuestException {
         model = Model.getInstance();
         model.addUserName("guest");
         model.addUserID(0);
         model.getCurrentStage().close();
 
-        ControllerVidSelection c = new ControllerVidSelection();
-        c.openStartScene();
+        new VideoSelection().openStartScene();
     }
-    public void goToChooseUser() throws IOException {
 
-        ChooseUserScreen c = new ChooseUserScreen();
-        c.chooseUser();
+    public void goToChooseUser() throws IOException {
+        new ChooseUserScreen().chooseUser();
 
     }
 }

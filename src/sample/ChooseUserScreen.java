@@ -127,7 +127,7 @@ public class ChooseUserScreen {
         }
     }
     public void openStartSceneMethod() throws IOException, loggedInAsGuestException {
-        new ControllerVidSelection().openStartScene();
+        new VideoSelection().openStartScene();
     }
     public void openChangeUserWindow() throws IOException {
 
