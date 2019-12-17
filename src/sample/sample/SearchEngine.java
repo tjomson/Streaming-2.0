@@ -25,7 +25,7 @@ public class SearchEngine {
         List<Video> genreList = new ArrayList<>();
         for (Video video : videos){
             for(String string : video.getGenres()){
-                if(string.equals(genreText) || genreText.equals("All")){
+                if(string.equals(genreText) || genreText.equals("Alle")){
                     genreList.add(video);
                 }
             }
@@ -45,7 +45,7 @@ public class SearchEngine {
 
         if(onMyList) {
             if (model.getUserID()==0) {
-                throw new loggedInAsGuestException("This feature is not available when you're logged in as a guest. You can log in as user by clicking 'Change user' in the upper right corner.");
+                throw new loggedInAsGuestException("Denne funktion er ikke tilgengælig når du er logget ind som gæst. Du kan logge ind som bruger, ved at klikke på 'Skift bruger' oppe i højre hjørne.");
             }
             for(Video v : searchList){
                 for(Video myListv : model.getMyList()){
@@ -58,27 +58,27 @@ public class SearchEngine {
         }
 
 
-        if (sortText.equals("Title: A-Z")) {
+        if (sortText.equals("Titel: A-Å")) {
             searchList.sort(Comparator.comparing(Video::getTitle));
         }
-        if (sortText.equals("Title: Z-A")) {
+        if (sortText.equals("Titel: Å-A")) {
             searchList.sort(Comparator.comparing(Video::getTitle).reversed());
         }
-        if (sortText.equals("Year: new-old")) {
+        if (sortText.equals("Årstal: Ny-Gammel")) {
             searchList.sort(Comparator.comparing(Video::getYear).reversed());
         }
-        if (sortText.equals("Year: old-new")) {
+        if (sortText.equals("Årstal: Ny-Gammel")) {
             searchList.sort(Comparator.comparing(Video::getYear));
         }
-        if (sortText.equals("Rating: best-worst")) {
+        if (sortText.equals("Vurdering: Bedst-Dårligst")) {
             searchList.sort(Comparator.comparing(Video::getRating).reversed());
         }
-        if (sortText.equals("Rating: worst-best")) {
+        if (sortText.equals("Vurdering: Bedst-Dårligst")) {
             searchList.sort(Comparator.comparing(Video::getRating));
         }
 
         if (searchList.isEmpty()) {
-            throw new noSuchVideoException("We couldn't find any video matching your criteria, please try again");
+            throw new noSuchVideoException("Vi kunne ikke finde en video der matchede dine kriterier, prøv igen.");
         }
 
         return searchList;

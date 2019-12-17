@@ -29,7 +29,7 @@ public class ChooseUserScreen {
         model.getCurrentStage().close();
         Stage stage = new Stage();
 
-        stage.getIcons().add(new Image("/blackSquare.png"));
+       // stage.getIcons().add(new Image("/blackSquare.png"));
 
         model.addCurrentStage(stage);
 
@@ -66,7 +66,7 @@ public class ChooseUserScreen {
 
         Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
         goatLabel.setBorder(border);
-        Label chooseUserLabel = new Label("Choose user:");
+        Label chooseUserLabel = new Label("Vælg bruger:");
 
         window.getChildren().addAll(goatLabel,chooseUserLabel,userButtons[1],userButtons[2],userButtons[3]);
 
@@ -101,7 +101,7 @@ public class ChooseUserScreen {
         });
 
         currentStage = new Stage();
-        currentStage.getIcons().add(new Image("/blackSquare.png"));
+        //currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
         currentStage.setScene(new Scene(window, 400, 400));
         currentStage.setTitle("GOAT");
@@ -118,7 +118,7 @@ public class ChooseUserScreen {
         model.createMyList();
 
 
-        if (!userButtons[userNumber].getText().equals("New User")) {
+        if (!userButtons[userNumber].getText().equals("Ny Bruger")) {
             model.addUserName(userButtons[userNumber].getText());
             openStartSceneMethod();
             model.getCurrentStage().close();
@@ -133,13 +133,13 @@ public class ChooseUserScreen {
 
         model = Model.getInstance();
         TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Create new user");
+        dialog.setTitle("Lav ny bruger");
         dialog.setHeaderText("GOAT UP YOUR LIFE");
-        dialog.setContentText("Enter your name: ");
+        dialog.setContentText("Skriv dit navn: ");
         dialog.setGraphic(null);
 
         Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-        stage.getIcons().add(new Image("blackSquare.png"));
+       // stage.getIcons().add(new Image("blackSquare.png"));
 
         Optional<String> result = dialog.showAndWait();
 

@@ -22,6 +22,7 @@ import java.util.Map;
 
 public class VideoInfo {
 
+
     private Model model;
     private Stage currentStage;
 
@@ -53,18 +54,18 @@ public class VideoInfo {
             } else {
                 endYearString = series1.getEndYear() + "";
             }
-            yearLabel = new Label("Year: " + video.getYear() + "-" + endYearString);
+            yearLabel = new Label("Årstal: " + video.getYear() + "-" + endYearString);
         } else {
-            yearLabel = new Label("Year: " + video.getYear());
+            yearLabel = new Label("Årstal: " + video.getYear());
         }
 
         HBox genreField = new HBox();
-        genreField.getChildren().add(new Label("Genres: "));
+        genreField.getChildren().add(new Label("Genre: "));
         for (String genre : video.getGenres()) {
             genreField.getChildren().add(new Label(genre + " "));
         }
 
-        infoBox.getChildren().addAll(new Label("Title: " + video.getTitle()),yearLabel,genreField,new Label("Rating: " + video.getRating() + ""));
+        infoBox.getChildren().addAll(new Label("Titel: " + video.getTitle()),yearLabel,genreField,new Label("Vurdering: " + video.getRating() + ""));
 
         imageInfoBox.getChildren().addAll(imageView,infoBox);
 
@@ -73,7 +74,7 @@ public class VideoInfo {
         MediaPlayer mediaPlayer = new MediaPlayer(media);
         MediaView mediaView = new MediaView(mediaPlayer);
 
-        Button playButton = new Button("Play");
+        Button playButton = new Button("Afspil");
         Button muteButton = new Button("Mute");
 
         muteButton.setOnAction(actionEvent -> {
@@ -102,18 +103,18 @@ public class VideoInfo {
             }
 
             if (isOnMyList) {
-                addToMyListButton.setText("Remove from My List");
+                addToMyListButton.setText("Fjern fra Min Liste");
             } else {
-                addToMyListButton.setText("Add to My List");
+                addToMyListButton.setText("Tilføj til Min Liste");
             }
 
             addToMyListButton.setOnAction(actionEvent -> {
-                if (addToMyListButton.getText().equals("Add to My List")) {
+                if (addToMyListButton.getText().equals("Tilføj til Min Liste")) {
                     model.addToMyList(video);
-                    addToMyListButton.setText("Remove from My List");
+                    addToMyListButton.setText("Fjern fra Min Liste");
                 } else {
                     model.removeFromMyList(video);
-                    addToMyListButton.setText("Add to My List");
+                    addToMyListButton.setText("Tilføj til Min Liste");
                 }
 
             });
@@ -121,33 +122,33 @@ public class VideoInfo {
         }
 
         playButton.setOnAction(actionEvent -> {
-            if(playButton.getText().equals("Play")) {
+            if(playButton.getText().equals("Afspil")) {
                 mediaPlayer.play();
                 playButton.setText("Pause");
             }
             else{
                 mediaPlayer.pause();
-                playButton.setText("Play");
+                playButton.setText("Afspil");
             }
 
 
         });
 
         mediaPlayer.setOnEndOfMedia(() -> {
-            playButton.setText("Play");
+            playButton.setText("Afspil");
             mediaPlayer.seek(Duration.millis(0));
             mediaPlayer.pause();
         });
 
         if(video instanceof Series){
-            Label nowPlayingLabel = new Label("Episode selected: Season 1 episode 1");
+            Label nowPlayingLabel = new Label("Episode valgt: Sæson 1 episode 1");
 
             Series series = (Series) video;
             ScrollPane scrollPane = new ScrollPane();
             VBox seasonsBox = new VBox();
             scrollPane.setContent(seasonsBox);
             scrollPane.setFitToWidth(true);
-            infoBox.getChildren().add(new Label("Number of seasons: " + series.getSeasons().size()));
+            infoBox.getChildren().add(new Label("Antal sæsoner: " + series.getSeasons().size()));
 
             for(Map.Entry entry : series.getSeasons().entrySet()){
 
@@ -157,14 +158,14 @@ public class VideoInfo {
                     Button button = new Button("Episode " + i);
                     final int finalInt = i; //En label kan kun tage en final int.
                     button.setOnAction(actionEvent -> {
-                                nowPlayingLabel.setText("Episode selected: Season " + entry.getKey() + " episode " + finalInt);
+                                nowPlayingLabel.setText("Episode valgt: Sæson " + entry.getKey() + " episode " + finalInt);
                                 mediaPlayer.seek(Duration.millis(0));
                             }
                     );
 
                     episodesFlowPane.getChildren().add(button);
                 }
-                seasonsBox.getChildren().addAll(new Label("Season " + entry.getKey()),episodesFlowPane);
+                seasonsBox.getChildren().addAll(new Label("Sæson " + entry.getKey()),episodesFlowPane);
             }
             window.getChildren().addAll(mediaView,nowPlayingLabel,buttons,imageInfoBox,scrollPane);
 
@@ -176,7 +177,7 @@ public class VideoInfo {
         window.setOnMouseDragExited(mouseDragEvent -> mediaPlayer.stop());
 
         currentStage = new Stage();
-        currentStage.getIcons().add(new Image("/blackSquare.png"));
+      //  currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
         currentStage.setOnCloseRequest(windowEvent -> mediaPlayer.stop());
         currentStage.setScene(new Scene(window, 700, 900));

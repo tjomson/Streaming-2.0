@@ -22,7 +22,7 @@ public class VideoSelection {
     private CheckBox movieCheckBox = new CheckBox();
     private CheckBox seriesCheckBox = new CheckBox();
     private CheckBox myListCheckBox = new CheckBox();
-    private Button changeUserButton = new Button("Change user");
+    private Button changeUserButton = new Button("Skift bruger");
     private Stage mainStage;
 
     public void openStartScene() throws IOException, loggedInAsGuestException {
@@ -36,7 +36,7 @@ public class VideoSelection {
             flowPane.setHgap(10);
             flowPane.setAlignment(Pos.CENTER);
 
-            List<Video> videos = new SearchEngine().getSearchItems("", "Title: A-Z", "All", true, true, false);
+            List<Video> videos = new SearchEngine().getSearchItems("", "Titel: A-Å", "Alle", true, true, false);
 
             for (Video video : videos) {
                 VBox vBox = video.toVBox();
@@ -48,7 +48,7 @@ public class VideoSelection {
             scrollPane.setFitToWidth(true);
 
             VBox window = new VBox();
-            Label userNameLabel = new Label(" You are logged in as: " + model.getUserName());
+            Label userNameLabel = new Label(" Du er logget ind som: " + model.getUserName());
 
             FlowPane topBar = new FlowPane();
 
@@ -78,7 +78,7 @@ public class VideoSelection {
                 model.getMainStage().close();
             });
 
-            sortingOptions.getItems().addAll("Title: A-Z", "Title: Z-A", "Year: new-old", "Year: old-new", "Rating: best-worst", "Rating: worst-best");
+            sortingOptions.getItems().addAll("Titel: A-Å", "Titel: Å-A", "Årstal: Ny-Gammel", "Årstal: gammel-ny", "Vurdering: bedst-dårligst", "Vurdering: dårligst-bedst");
             sortingOptions.getSelectionModel().select(0);
 
             List<String> genres = new ArrayList<>();
@@ -91,7 +91,7 @@ public class VideoSelection {
                 }
             }
 
-            genreOptions.getItems().add("All");
+            genreOptions.getItems().add("Alle");
             genreOptions.getItems().addAll(genres);
             genreOptions.getSelectionModel().select(0);
 
@@ -101,19 +101,19 @@ public class VideoSelection {
             myListCheckBox.setSelected(false);
 
             topBar.getChildren().addAll(
-                    new Label(" Search for title:"),
+                    new Label(" Søg på titel:"),
                     searchField,
-                    new Label(" Sort by:"),
+                    new Label(" Sorter efter:"),
                     sortingOptions,
-                    new Label(" Genres:"),
+                    new Label(" Genre:"),
                     genreOptions,
 
-                    new Label(" Show movies"),
+                    new Label(" Vis film"),
                     movieCheckBox,
-                    new Label(" Show series"),
+                    new Label(" Vis serier"),
 
                     seriesCheckBox,
-                    new Label(" On my list"),
+                    new Label(" På min liste"),
                     myListCheckBox,
                     changeUserButton);
 
@@ -122,7 +122,7 @@ public class VideoSelection {
 
             mainStage = new Stage();
             mainStage.setTitle("GOAT");
-            mainStage.getIcons().add(new Image("/blackSquare.png"));
+            //mainStage.getIcons().add(new Image("/blackSquare.png"));
             model.addMainStage(mainStage);
             mainStage.setScene(new Scene(window, 1200, 600));
             mainStage.show();

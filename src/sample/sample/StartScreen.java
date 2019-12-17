@@ -38,8 +38,8 @@ public class StartScreen extends Application {
 
         window.setSpacing(10);
 
-        Button continueAsGuestButton = new Button("Continue as guest");
-        Button signInAsUserButton = new Button("Sign in as user");
+        Button continueAsGuestButton = new Button("Fortsæt som gæst");
+        Button signInAsUserButton = new Button("Log ind som bruger");
         window.getChildren().addAll(continueAsGuestButton,signInAsUserButton);
 
         continueAsGuestButton.setOnAction(actionEvent -> {
@@ -62,7 +62,7 @@ public class StartScreen extends Application {
 
         model = Model.getInstance();
 
-        stage.getIcons().add(new Image("/blackSquare.png"));
+       // stage.getIcons().add(new Image("/blackSquare.png"));
 
         model.addCurrentStage(stage);
 
@@ -77,7 +77,7 @@ public class StartScreen extends Application {
     }
     public void goToVidSelection() throws IOException, loggedInAsGuestException {
         model = Model.getInstance();
-        model.addUserName("guest");
+        model.addUserName("gæst");
         model.addUserID(0);
         model.getCurrentStage().close();
 
