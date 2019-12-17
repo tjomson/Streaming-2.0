@@ -42,6 +42,9 @@ public class StartScreen extends Application {
         Button signInAsUserButton = new Button("Log ind som bruger");
         window.getChildren().addAll(continueAsGuestButton,signInAsUserButton);
 
+        continueAsGuestButton.setPrefWidth(130);
+        signInAsUserButton.setPrefWidth(130);
+
         continueAsGuestButton.setOnAction(actionEvent -> {
             try {
                 goToVidSelection();
