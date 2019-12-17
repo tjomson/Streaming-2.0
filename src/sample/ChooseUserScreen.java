@@ -104,7 +104,7 @@ public class ChooseUserScreen {
         currentStage.getIcons().add(new Image("/blackSquare.png"));
         model.addCurrentStage(currentStage);
         currentStage.setScene(new Scene(window, 400, 400));
-        currentStage.setTitle("lmao");
+        currentStage.setTitle("GOAT");
         currentStage.show();
 
     }
