@@ -84,7 +84,6 @@ public class Model {
 
     //Fjerner fra liste ved at sammenligne titler, da det ikke virkede at sammenligne objekter.
     public void removeFromMyList(Video video){
-
         List<Video> temporaryList = new ArrayList<>();
         for(Video v : getMyList()){
             if(!v.getTitle().equals(video.getTitle())){

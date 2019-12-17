@@ -1,5 +1,6 @@
 package sample;
 
+//Exception som kastes hvis man er logget ind som gæst og prøver at se Min Liste.
 public class loggedInAsGuestException extends Exception {
 
     private String message;

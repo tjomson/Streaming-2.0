@@ -16,6 +16,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Optional;
 
+//Denne klasse er ansvarlig for når man skal vælge bruger.
 public class ChooseUserScreen {
     private Model model;
     private Stage currentStage;
@@ -29,40 +30,30 @@ public class ChooseUserScreen {
         model.getCurrentStage().close();
         Stage stage = new Stage();
 
-       stage.getIcons().add(new Image("/blackSquare.png"));
-
         model.addCurrentStage(stage);
 
-        ChooseUserScreen c = new ChooseUserScreen();
-        c.openChooseUserScreen();
-    }
-
-    public void openChooseUserScreen() throws IOException {
-        model = Model.getInstance();
         VBox window = new VBox();
+        //De tre knapper til de tre brugere.
         user1Button = new Button();
         user2Button = new Button();
         user3Button = new Button();
         userButtons = new Button[]{new Button(),user1Button, user2Button, user3Button}; //new Button() tilføjes for at fylde index 0 ud.
 
         for(int i = 1; i<=3; i++) {
-                userButtons[i].setText(new Reader().findFile("user" + i).get(0));
+            userButtons[i].setText(new Reader().findFile("user" + i).get(0));
         }
-
 
         user1Button.setPrefWidth(100);
         user2Button.setPrefWidth(100);
         user3Button.setPrefWidth(100);
 
         window.setAlignment(Pos.CENTER);
-        BackgroundFill background_fill = new BackgroundFill(Color.RED,
-                CornerRadii.EMPTY, Insets.EMPTY);
+        BackgroundFill background_fill = new BackgroundFill(Color.RED, CornerRadii.EMPTY, Insets.EMPTY);
         window.setBackground(new Background(background_fill));
 
         window.setSpacing(10);
 
         Label goatLabel = new Label("GOAT");
-
 
         Border border = new Border(new BorderStroke(Color.BLACK, BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT));
         goatLabel.setBorder(border);
@@ -70,6 +61,7 @@ public class ChooseUserScreen {
 
         window.getChildren().addAll(goatLabel,chooseUserLabel,userButtons[1],userButtons[2],userButtons[3]);
 
+        //Knappernes funktioner defineres.
         userButtons[1].setOnAction(actionEvent -> {
             try {
                 userClick(1);
@@ -109,55 +101,46 @@ public class ChooseUserScreen {
 
     }
 
-
-
+    //Metode som opretter Min Liste når man har valgt en bruger. Hvis der oprettes en ny bruger, åbnes en dialogboks hvor man kan skrive navn.
     public void userClick(int userNumber) throws IOException, loggedInAsGuestException {
 
         model = Model.getInstance();
         model.addUserID(userNumber);
         model.createMyList();
 
+        //Hvis der allerede findes en bruger.
         if (!userButtons[userNumber].getText().equals("Ny Bruger")) {
             model.addUserName(userButtons[userNumber].getText());
-            openStartSceneMethod();
+            new VideoSelection().openStartScene();
             model.getCurrentStage().close();
         } else {
-            openChangeUserWindow();
-        }
-    }
+            //Hvis der oprettes en ny bruger.
+            TextInputDialog dialog = new TextInputDialog();
+            dialog.setTitle("Lav ny bruger");
+            dialog.setHeaderText("GOAT UP YOUR LIFE");
+            dialog.setContentText("Skriv dit navn: ");
+            dialog.setGraphic(null);
 
-    public void openStartSceneMethod() throws IOException, loggedInAsGuestException {
-        new VideoSelection().openStartScene();
-    }
-    public void openChangeUserWindow() throws IOException {
+            Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
+            stage.getIcons().add(new Image("blackSquare.png"));
 
-        model = Model.getInstance();
-        TextInputDialog dialog = new TextInputDialog();
-        dialog.setTitle("Lav ny bruger");
-        dialog.setHeaderText("GOAT UP YOUR LIFE");
-        dialog.setContentText("Skriv dit navn: ");
-        dialog.setGraphic(null);
+            Optional<String> result = dialog.showAndWait();
 
-        Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-       // stage.getIcons().add(new Image("blackSquare.png"));
-
-        Optional<String> result = dialog.showAndWait();
-
-        if (result.isPresent()) {
-            if (model.getUserID() == 1) {
+            if (result.isPresent()) {
                 model.addUserName(result.get());
-                userButtons[1].setText(result.get());
-                writeNewUser(1);
-            }
-            if (model.getUserID() == 2) {
-                model.addUserName(result.get());
-                userButtons[2].setText(result.get());
-                writeNewUser(2);
-            }
-            if (model.getUserID() == 3) {
-                model.addUserName(result.get());
-                userButtons[3].setText(result.get());
-                writeNewUser(3);
+
+                if (model.getUserID() == 1) {
+                    userButtons[1].setText(result.get());
+                    writeNewUser(1);
+                }
+                if (model.getUserID() == 2) {
+                    userButtons[2].setText(result.get());
+                    writeNewUser(2);
+                }
+                if (model.getUserID() == 3) {
+                    userButtons[3].setText(result.get());
+                    writeNewUser(3);
+                }
             }
         }
     }
@@ -169,6 +152,5 @@ public class ChooseUserScreen {
             e.printStackTrace();
         }
     }
-
 
 }
