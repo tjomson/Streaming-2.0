@@ -33,10 +33,10 @@ public class VideoSelection {
 
             model = Model.getInstance();
 
-            FlowPane flowPane = new FlowPane();
-            flowPane.setVgap(10);
-            flowPane.setHgap(10);
-            flowPane.setAlignment(Pos.CENTER);
+            FlowPane videoView = new FlowPane();
+            videoView.setVgap(10);
+            videoView.setHgap(10);
+            videoView.setAlignment(Pos.CENTER);
 
             //De videoer som vise når vinduet åbnes findes.
             List<Video> videos = new SearchEngine().getSearchItems("", "Titel: A-Å", "Alle", true, true, false);
@@ -44,12 +44,12 @@ public class VideoSelection {
             //Hver videos VBox tilføjes til FlowPane'et
             for (Video video : videos) {
                 VBox vBox = video.toVBox();
-                flowPane.getChildren().add(vBox);
+                videoView.getChildren().add(vBox);
             }
 
             //ScrollPane'et sættes til at indeholde FlowPane'et
             ScrollPane scrollPane = new ScrollPane();
-            scrollPane.setContent(flowPane);
+            scrollPane.setContent(videoView);
             scrollPane.setFitToWidth(true);
 
             VBox window = new VBox();
@@ -61,12 +61,12 @@ public class VideoSelection {
             topBar.setHgap(10.0);
 
             //Når man ændrer på et felt, opdateres videoerne.
-            searchField.setOnKeyTyped(keyEvent -> updateVideoSelection(flowPane));
-            movieCheckBox.setOnAction(actionEvent -> updateVideoSelection(flowPane));
-            seriesCheckBox.setOnAction(actionEvent -> updateVideoSelection(flowPane));
-            myListCheckBox.setOnAction(actionEvent -> updateVideoSelection(flowPane));
-            genreOptions.setOnAction(actionEvent -> updateVideoSelection(flowPane));
-            sortingOptions.setOnAction(actionEvent -> updateVideoSelection(flowPane));
+            searchField.setOnKeyTyped(keyEvent -> updateVideoSelection(videoView));
+            movieCheckBox.setOnAction(actionEvent -> updateVideoSelection(videoView));
+            seriesCheckBox.setOnAction(actionEvent -> updateVideoSelection(videoView));
+            myListCheckBox.setOnAction(actionEvent -> updateVideoSelection(videoView));
+            genreOptions.setOnAction(actionEvent -> updateVideoSelection(videoView));
+            sortingOptions.setOnAction(actionEvent -> updateVideoSelection(videoView));
 
             //changeUserButton skal sende en hen til siden hvor man kan ændre bruger.
             changeUserButton.setOnAction(actionEvent -> {
