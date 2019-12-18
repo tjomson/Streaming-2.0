@@ -7,4 +7,5 @@ import java.io.FileNotFoundException;
 public interface Playable {
 
     VBox toVBox() throws FileNotFoundException;
+
 }

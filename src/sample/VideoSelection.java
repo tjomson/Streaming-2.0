@@ -1,5 +1,7 @@
 package sample;
 
+import javafx.application.Platform;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
@@ -7,8 +9,10 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.FlowPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 import java.io.IOException;
+import java.lang.management.PlatformLoggingMXBean;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,8 +47,13 @@ public class VideoSelection {
 
             //Hver videos VBox tilføjes til FlowPane'et
             for (Video video : videos) {
-                VBox vBox = video.toVBox();
-                videoView.getChildren().add(vBox);
+                try {
+                    VBox vBox = video.toVBox();
+                    videoView.getChildren().add(vBox);
+                }
+                catch (TooOldVideoException e){
+                    System.out.println(e.getMessage());
+                }
             }
 
             //ScrollPane'et sættes til at indeholde FlowPane'et
@@ -61,7 +70,7 @@ public class VideoSelection {
             topBar.setHgap(10.0);
 
             //Når man ændrer på et felt, opdateres videoerne.
-            searchField.setOnKeyTyped(keyEvent -> updateVideoSelection(videoView));
+            searchField.setOnKeyReleased(keyEvent -> updateVideoSelection(videoView));
             movieCheckBox.setOnAction(actionEvent -> updateVideoSelection(videoView));
             seriesCheckBox.setOnAction(actionEvent -> updateVideoSelection(videoView));
             myListCheckBox.setOnAction(actionEvent -> updateVideoSelection(videoView));
@@ -126,6 +135,7 @@ public class VideoSelection {
 
             mainStage = new Stage();
             mainStage.setTitle("GOAT");
+            mainStage.setOnCloseRequest(event -> System.exit(0)); //Hvis vinduet lukkes, stoppes hele programmet.
             mainStage.getIcons().add(new Image("/blackSquare.png"));
             model.addMainStage(mainStage);
             mainStage.setScene(new Scene(window, 1200, 600));

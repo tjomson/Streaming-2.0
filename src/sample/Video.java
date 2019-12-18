@@ -28,7 +28,7 @@ public class Video implements Playable {
     }
     //En videos informationer bruges til at lave en VBox som kan vises.
     @Override
-    public VBox toVBox() throws FileNotFoundException {
+    public VBox toVBox() throws FileNotFoundException, TooOldVideoException{
 
         //Videoens billede findes.
         FileInputStream f;
@@ -47,19 +47,23 @@ public class Video implements Playable {
         titleLabel.setWrapText(true);
         Label yearLabel;
 
-        //Hvis det er en serie skal slutåret også vises.
-        if (this instanceof Series) {
-            Series series1 = (Series) this;
-            String endYearString;
-            if (series1.getEndYear() == 0) {
-                endYearString = "";
-            } else {
-                endYearString = series1.getEndYear() + "";
+            if (year <= 0) {
+                throw new TooOldVideoException(year);
             }
-            yearLabel = new Label(this.getYear() + "-" + endYearString);
-        } else {
-            yearLabel = new Label("" + this.getYear());
-        }
+
+            //Hvis det er en serie skal slutåret også vises.
+            if (this instanceof Series) {
+                Series series1 = (Series) this;
+                String endYearString;
+                if (series1.getEndYear() == 0) {
+                    endYearString = "";
+                } else {
+                    endYearString = series1.getEndYear() + "";
+                }
+                yearLabel = new Label(this.getYear() + "-" + endYearString);
+            } else {
+                yearLabel = new Label("" + this.getYear());
+            }
 
         //Alle videoens genrer indsættes.
         FlowPane genreField = new FlowPane();
