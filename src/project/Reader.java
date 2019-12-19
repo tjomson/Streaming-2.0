@@ -1,7 +1,5 @@
 package project;
 
-import javafx.scene.image.Image;
-
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,8 +7,6 @@ import java.util.List;
 //Denne klasse er ansvarlig for at læse en fil og returnere hver linje i en arrayliste.
 public class Reader {
     public List<String> findFile(String fileName) throws IOException {
-
-        //File file = new File(fileName);
 
         InputStream in = this.getClass().getClassLoader().getResourceAsStream("AndreFiler/" + fileName);
 
