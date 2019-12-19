@@ -127,7 +127,7 @@ public class VideoSelection {
             mainStage = new Stage();
             mainStage.setTitle("GOAT");
             mainStage.setOnCloseRequest(event -> System.exit(0)); //Hvis vinduet lukkes, stoppes hele programmet.
-            mainStage.getIcons().add(new Image(this.getClass().getClassLoader().getResourceAsStream("AndreFiler/blackSquare.png")));
+            mainStage.getIcons().add(model.getIcon());
             model.addMainStage(mainStage);
             mainStage.setScene(new Scene(window, 1200, 600));
             mainStage.show();

@@ -1,6 +1,7 @@
 package project;
 
 
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -48,6 +49,10 @@ public class Model {
             model = new Model();
         }
         return model;
+    }
+
+    public Image getIcon(){
+        return new Image(this.getClass().getClassLoader().getResourceAsStream("AndreFiler/blackSquare.png"));
     }
 
     public List<Movie> getMovies() throws IOException {

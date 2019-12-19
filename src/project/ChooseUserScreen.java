@@ -90,7 +90,7 @@ public class ChooseUserScreen {
         });
 
         currentStage = new Stage();
-        currentStage.getIcons().add(new Image(this.getClass().getClassLoader().getResourceAsStream("AndreFiler/blackSquare.png")));
+        currentStage.getIcons().add(model.getIcon());
         model.addCurrentStage(currentStage);
         currentStage.setScene(new Scene(window, 400, 400));
         currentStage.setTitle("GOAT");
@@ -119,7 +119,7 @@ public class ChooseUserScreen {
             dialog.setGraphic(null);
 
             Stage stage = (Stage) dialog.getDialogPane().getScene().getWindow();
-            stage.getIcons().add(new Image(this.getClass().getClassLoader().getResourceAsStream("AndreFiler/blackSquare.png")));
+            stage.getIcons().add(model.getIcon());
 
             Optional<String> result = dialog.showAndWait();
 

@@ -196,7 +196,7 @@ public class VideoInfo {
         }
 
         currentStage = new Stage();
-        currentStage.getIcons().add(new Image(this.getClass().getClassLoader().getResourceAsStream("AndreFiler/blackSquare.png")));
+        currentStage.getIcons().add(model.getIcon());
         model.addCurrentStage(currentStage);
         currentStage.setOnCloseRequest(windowEvent -> mediaPlayer.stop()); //Videoafspilning stopper når vinduet lukkes.
         currentStage.setScene(new Scene(window, 700, 900));

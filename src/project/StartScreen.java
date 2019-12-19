@@ -66,7 +66,7 @@ public class StartScreen extends Application {
 
         model = Model.getInstance();
 
-        stage.getIcons().add(new Image(this.getClass().getClassLoader().getResourceAsStream("AndreFiler/blackSquare.png")));
+        stage.getIcons().add(model.getIcon());
 
         model.addCurrentStage(stage);
 
