@@ -166,9 +166,12 @@ public class VideoInfo {
             for(Map.Entry entry : series.getSeasons().entrySet()){
 
                 FlowPane episodesFlowPane = new FlowPane();
+                episodesFlowPane.setVgap(10);
+                episodesFlowPane.setHgap(10);
                 int numberOfEpisodes = (int) entry.getValue();
                 for(int i = 1; i <= numberOfEpisodes; i++){
                     Button button = new Button("Episode " + i);
+                    button.setPrefWidth(90);
                     final int finalInt = i; //En label kan kun tage en final int.
                     button.setOnAction(actionEvent -> {
                                 //Når man klikker på et afsnit, starter eksempel-videoen forfra, og der skrives hvilket afsnit som afspiller.
