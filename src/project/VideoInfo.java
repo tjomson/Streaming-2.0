@@ -39,7 +39,7 @@ public class VideoInfo {
         window.setSpacing(20);
 
         //Videoens billede findes.
-        Image image ;
+        Image image;
         //Der tjekkes om det er en film eller en serie, da billederne ligger i forskellige mapper.
         if (video instanceof Movie) {
             image = new Image(this.getClass().getResource("/FilmBilleder/" + video.getTitle() + ".jpg").toExternalForm());

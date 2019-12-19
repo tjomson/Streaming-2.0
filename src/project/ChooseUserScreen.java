@@ -102,7 +102,6 @@ public class ChooseUserScreen {
     public void userClick(int userNumber) throws IOException, loggedInAsGuestException {
 
         model = Model.getInstance();
-        model.addUserID(userNumber);
         model.setCurrentUserNumber(userNumber);
 
         //Hvis der allerede findes en bruger.
@@ -126,15 +125,15 @@ public class ChooseUserScreen {
             if (result.isPresent()) {
                 model.addUserName(result.get());
 
-                if (model.getUserID() == 1) {
+                if (userNumber == 1) {
                     userButtons[1].setText(result.get());
                     model.setUsername(1, result.get());
                 }
-                if (model.getUserID() == 2) {
+                if (userNumber == 2) {
                     userButtons[2].setText(result.get());
                     model.setUsername(2, result.get());
                 }
-                if (model.getUserID() == 3) {
+                if (userNumber == 3) {
                     userButtons[3].setText(result.get());
                     model.setUsername(3, result.get());
                 }

@@ -48,8 +48,7 @@ public class StartScreen extends Application {
         continueAsGuestButton.setOnAction(actionEvent -> {
             try {
                 model = Model.getInstance();
-                model.addUserName("gæst");
-                model.addUserID(0);
+                model.setUsername(0, "gæst");
                 model.getCurrentStage().close();
 
                 new VideoSelection().openStartScene();

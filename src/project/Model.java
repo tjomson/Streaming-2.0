@@ -27,6 +27,13 @@ public class Model {
     private Model() {
     }
 
+    public static Model getInstance() {
+        if (model == null) {
+            model = new Model();
+        }
+        return model;
+    }
+
     public String getUsername(int userNumber){
      return usernames[userNumber];
     }
@@ -40,15 +47,10 @@ public class Model {
         return currentUserNumber;
     }
 
-    public void setUsername(int usernumber, String newUsername){
-        usernames[usernumber] = newUsername;
-    }
-
-    public static Model getInstance() {
-        if (model == null) {
-            model = new Model();
-        }
-        return model;
+    public void setUsername(int userNumber, String newUsername){
+        chosenUser = userNumber;
+        userName = newUsername;
+        usernames[userNumber] = newUsername;
     }
 
     public Image getIcon(){
@@ -63,10 +65,6 @@ public class Model {
     public List<Series> getSeries() throws IOException {
         SeriesReader sr = new SeriesReader();
         return sr.readSeries("serier.txt");
-    }
-
-    public void addUserID(int chosenUser) {
-        this.chosenUser = chosenUser;
     }
 
     public void addUserName(String name) {
