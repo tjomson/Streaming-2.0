@@ -47,7 +47,7 @@ public class VideoSelection {
                     VBox vBox = video.toVBox();
                     videoView.getChildren().add(vBox);
                 }
-                catch (TooOldVideoException e){
+                catch (InvalidVideoException e){
                     System.out.println(e.getMessage());
                 }
             }

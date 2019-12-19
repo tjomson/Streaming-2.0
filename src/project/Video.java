@@ -24,11 +24,14 @@ public class Video implements Playable {
         this.year = year;
         this.genres = genres;
         this.rating = rating;
+        if (year <= 0 || title.equals("") || rating < 0 || genres.length == 0) {
+            throw new InvalidVideoException(year,rating);
+        }
 
     }
     //En videos informationer bruges til at lave en VBox som kan vises.
     @Override
-    public VBox toVBox() throws TooOldVideoException{
+    public VBox toVBox() throws InvalidVideoException{
 
         //Videoens billede findes.
 
@@ -47,10 +50,6 @@ public class Video implements Playable {
         Label titleLabel = new Label(this.getTitle());
         titleLabel.setWrapText(true);
         Label yearLabel;
-
-            if (year <= 0) {
-                throw new TooOldVideoException(year);
-            }
 
             //Hvis det er en serie skal slutåret også vises.
             if (this instanceof Series) {
